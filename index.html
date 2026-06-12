@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Truck Carioquinha | Hambúrguer Artesanal e Cachorrão 30cm</title>
+  <meta name="description" content="Peça hambúrguer artesanal, cachorro-quente de 30cm, batata maluca, combos de casal e bebidas pelo WhatsApp. Food Truck Carioquinha na Praça do Carioquinha em Nova Iguaçu.">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              black: '#000000',
+              dark: '#0A0A0A',
+              card: '#141414',
+              yellow: '#FFC107',
+              yellowHover: '#E0A800',
+              red: '#E53935',
+              redHover: '#C62828',
+              gray: '#A0A0A0'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            title: ['Montserrat', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Scrollbar personalizada */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0A0A0A;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #FFC107;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #E0A800;
+    }
+    
+    /* Efeito de brilho neon */
+    .glow-yellow {
+      box-shadow: 0 0 15px rgba(255, 193, 7, 0.35);
+    }
+    .glow-red {
+      box-shadow: 0 0 15px rgba(229, 57, 53, 0.4);
+    }
+    .text-glow-yellow {
+      text-shadow: 0 0 8px rgba(255, 193, 7, 0.5);
+    }
+  </style>
+</head>
+<body class="bg-brand-black text-white font-sans antialiased min-h-screen">
+
+  <div id="status-bar" class="bg-brand-red text-white py-2 px-4 text-center text-sm font-bold tracking-wider transition-all duration-300">
+    <div class="flex items-center justify-center gap-2">
+      <span class="relative flex h-3 w-3">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+      </span>
+      <span id="status-text">A VERIFICAR HORÁRIO DE ATENDIMENTO...</span>
+    </div>
+  </div>
+
+  <header class="sticky top-0 z-40 bg-brand-black/95 backdrop-blur-md border-b border-white/10 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="relative w-14 h-14 rounded-full overflow-hidden border-2 border-brand-yellow bg-brand-black flex items-center justify-center shadow-lg">
+          <img src="imagens/logo.jpg" alt="Logo Carioquinha" onerror="this.onerror=null; this.src='logo.jpg';" class="w-full h-full object-cover">
+        </div>
+        <div>
+          <span class="font-title font-black text-xl tracking-tight block text-glow-yellow text-brand-yellow">CARIOQUINHA</span>
+          <span class="text-[10px] text-brand-gray tracking-widest block uppercase -mt-1">Nova Iguaçu & Lanches</span>
+        </div>
+      </a>
+
+      <div class="hidden md:flex flex-col text-right text-xs">
+        <span class="text-brand-yellow font-bold uppercase tracking-wider">Horário:</span>
+        <span class="text-white/80">Seg, Qua e Qui: 18h às 00h</span>
+        <span class="text-white/80">Sex, Sáb e Dom: 18h às 01h</span>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <a href="#cardapio" class="hidden sm:inline-flex bg-brand-yellow hover:bg-brand-yellowHover text-black font-bold px-5 py-2.5 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg shadow-brand-yellow/20 items-center gap-2">
+          Ver Cardápio
+        </a>
+        <button onclick="toggleCart()" class="relative p-3 bg-brand-card hover:bg-white/10 border border-white/10 rounded-full transition-all duration-300 focus:outline-none" aria-label="Abrir carrinho de compras">
+          <svg class="w-6 h-6 text-brand-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          </svg>
+          <span id="cart-count" class="absolute -top-1 -right-1 bg-brand-red text-white text-xs font-black rounded-full h-6 w-6 flex items-center justify-center border-2 border-brand-black animate-pulse">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="relative min-h-[85vh] flex items-center justify-center overflow-hidden py-12 px-4 bg-gradient-to-b from-brand-black via-brand-dark to-brand-black">
+    <div class="absolute inset-0 z-0 opacity-10">
+      <div class="absolute top-20 left-10 w-72 h-72 bg-brand-yellow rounded-full filter blur-3xl"></div>
+      <div class="absolute bottom-20 right-10 w-96 h-96 bg-brand-red rounded-full filter blur-3xl"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      
+      <div class="space-y-6 text-center lg:text-left">
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-brand-card rounded-full border border-white/10 text-brand-yellow font-semibold text-sm">
+          <svg class="w-4 h-4 text-brand-yellow" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/></svg>
+          Hamburgueria & Hot Dogs Premium em Nova Iguaçu
+        </div>
+        <h1 class="font-title font-black text-4xl sm:text-5xl lg:text-6xl text-white leading-tight">
+          Os melhores lanches de <span class="text-brand-yellow text-glow-yellow">Nova Iguaçu</span>
+        </h1>
+        <p class="text-lg text-brand-gray max-w-xl mx-auto lg:mx-0">
+          Hambúrgueres artesanais, Cachorrão Gigante de 30cm, Batata Maluca transbordando sabor, Combos Casal promocionais e Bebidas super geladas.
+        </p>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-md mx-auto lg:mx-0 pt-2">
+          <div class="bg-brand-card p-3 rounded-xl border border-white/5 flex flex-col items-center lg:items-start">
+            <svg class="w-6 h-6 text-brand-yellow mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            <span class="block text-xs font-bold text-white/60">Entrega Rápida</span>
+          </div>
+          <div class="bg-brand-card p-3 rounded-xl border border-white/5 flex flex-col items-center lg:items-start">
+            <svg class="w-6 h-6 text-brand-yellow mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+            <span class="block text-xs font-bold text-white/60">Artesanal de Verdade</span>
+          </div>
+          <div class="bg-brand-card p-3 rounded-xl border border-white/5 col-span-2 sm:col-span-1 flex flex-col items-center lg:items-start">
+            <svg class="w-6 h-6 text-brand-yellow mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5a3 3 0 00-3-3H9.7c-1.3 0-2.4 1-2.6 2.3l-.3 1.7H12z"></path></svg>
+            <span class="block text-xs font-bold text-white/60">Tradição desde 2010</span>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+          <a href="#cardapio" class="bg-brand-yellow hover:bg-brand-yellowHover text-black font-black px-8 py-4 rounded-xl text-lg transition-all duration-300 transform hover:scale-105 text-center glow-yellow flex items-center justify-center gap-2">
+            <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+            FAZER PEDIDO AGORA
+          </a>
+          <a href="https://wa.me/5521983116477" target="_blank" class="bg-brand-card hover:bg-white/10 border border-white/20 text-white font-bold px-8 py-4 rounded-xl text-lg transition-all duration-300 text-center flex items-center justify-center gap-2">
+            <svg class="w-6 h-6 text-green-500 fill-current" viewBox="0 0 24 24">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.963C16.588 1.981 14.115.95c-5.44 0-9.866 4.369-9.87 9.799-.001 1.702.461 3.361 1.339 4.815L1.824 21.67l6.221-1.611z"/>
+            </svg>
+            Chamar no WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="relative w-full max-w-lg mx-auto lg:max-w-none">
+        <div class="relative bg-gradient-to-tr from-brand-yellow/15 to-brand-red/15 rounded-3xl p-6 border border-white/10 overflow-hidden shadow-2xl transition-all duration-300 hover:border-brand-yellow/40 flex flex-col items-center justify-center">
+          <div class="w-full aspect-video rounded-2xl overflow-hidden bg-brand-black border-4 border-brand-yellow glow-yellow transition-transform duration-500 hover:scale-[1.03] shadow-2xl flex items-center justify-center">
+            <img class="w-full h-full object-cover" src="imagens/logo.jpg" alt="Logo Carioquinha" onerror="this.onerror=null; this.src='https://via.placeholder.com/560x315.png?text=Imagem+n%C3%A3o+encontrada';">
+          </div>
+          <div class="mt-6 text-center space-y-2">
+            <span class="inline-block bg-brand-yellow text-black text-xs font-black uppercase px-4 py-1.5 rounded-full tracking-wider shadow">A Melhor de Nova Iguaçu</span>
+            <p class="text-white/90 text-sm font-semibold">📍 R. Alagoas, 00 - Praça do Carioquinha - Nova Iguaçu</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="py-12 bg-brand-card/50 border-y border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+        
+        <div class="flex items-start gap-4">
+          <div class="p-4 bg-brand-yellow/10 rounded-2xl text-brand-yellow">
+            <svg class="w-8 h-8 text-brand-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          <div>
+            <h4 class="font-title font-bold text-lg text-white">Horário Oficial</h4>
+            <p class="text-sm text-brand-gray">Seg: 18:00h às 00:00h</p>
+            <p class="text-sm text-brand-gray">Qui: 18:00h às 00:00h</p>
+            <p class="text-sm text-brand-gray">Sex, Sáb e Dom: 18:00h às 01:00h</p>
+            <p class="text-xs text-brand-red font-bold uppercase mt-1">⏴ Terça e Quarta: FOLGA</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="p-4 bg-brand-red/10 rounded-2xl text-brand-red">
+            <svg class="w-8 h-8 text-brand-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+          </div>
+          <div>
+            <h4 class="font-title font-bold text-lg text-white">Localização</h4>
+            <p class="text-sm text-brand-gray">R. Alagoas, 00 - Praça do Carioquinha, Nova Iguaçu - RJ</p>
+            <p class="text-xs text-brand-yellow font-semibold mt-1">Consulte taxas de entrega pelo WhatsApp</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="p-4 bg-green-500/10 rounded-2xl text-green-500">
+            <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+          </div>
+          <div>
+            <h4 class="font-title font-bold text-lg text-white">Formas de Pagamento</h4>
+            <p class="text-sm text-brand-gray">Pix, Cartões de Débito/Crédito, Dinheiro</p>
+            <p class="text-xs text-brand-gray">Aceitamos MasterCard, VISA, Elo e Alelo</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="relative bg-gradient-to-tr from-brand-yellow/10 to-brand-red/10 rounded-3xl p-6 border border-white/10 overflow-hidden shadow-2xl">
+      <div id="promo-carousel" class="relative min-h-[420px]">
+        <div class="promo-slide transition-opacity duration-500 space-y-4">
+          <span class="inline-block bg-brand-red text-white text-xs font-extrabold uppercase px-3 py-1 rounded-full">Super Promoção</span>
+          <h3 class="font-title font-black text-3xl text-brand-yellow">Combo Casal X-Tudo</h3>
+          <p class="text-white/80 text-sm">Leve 2 X-Tudo deliciosos + 1 Refrigerante de 1 Litro (Antarctica) por um preço imbatível!</p>
+          <div class="flex items-baseline gap-2">
+            <span class="text-sm line-through text-brand-gray">R$ 38,00</span>
+            <span class="text-4xl font-black text-brand-red">R$ 29,00</span>
+          </div>
+          <div class="rounded-xl overflow-hidden bg-brand-black border border-white/5 flex items-center justify-center">
+            <img class="mx-auto max-w-full max-h-[420px] object-contain" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" alt="">
+          </div>
+        </div>
+
+        <div class="promo-slide hidden transition-opacity duration-500 space-y-4">
+          <span class="inline-block bg-brand-yellow text-black text-xs font-extrabold uppercase px-3 py-1 rounded-full">O Gigante da Casa</span>
+          <h3 class="font-title font-black text-3xl text-brand-red">Cachorrão de 30cm</h3>
+          <p class="text-white/80 text-sm">Com 18 ingredientes selecionados! Sabor e tamanho sem igual na região.</p>
+          <div class="flex items-baseline gap-2">
+            <span class="text-sm text-brand-gray">A partir de</span>
+            <span class="text-4xl font-black text-brand-yellow">R$ 20,00</span>
+          </div>
+          <div class="rounded-xl overflow-hidden bg-brand-black border border-white/5 flex items-center justify-center">
+            <img class="mx-auto max-w-full max-h-[420px] object-contain" src="https://images.unsplash.com/photo-1619740455993-9e612b1af08a?auto=format&fit=crop&w=600&q=80" alt="">
+          </div>
+        </div>
+
+        <div class="promo-slide hidden transition-opacity duration-500 space-y-4">
+          <span class="inline-block bg-green-500 text-white text-xs font-extrabold uppercase px-3 py-1 rounded-full">Novidade Suprema</span>
+          <h3 class="font-title font-black text-3xl text-brand-yellow">Batata Maluca</h3>
+          <p class="text-white/80 text-sm">Cheddar cremoso, calabresa crocante, muito bacon e molho especial.</p>
+          <div class="flex items-baseline gap-2">
+            <span class="text-sm text-brand-gray">A partir de</span>
+            <span class="text-4xl font-black text-brand-red">R$ 16,00</span>
+          </div>
+          <div class="rounded-xl overflow-hidden bg-brand-black border border-white/5 flex items-center justify-center">
+            <img class="mx-auto max-w-full max-h-[420px] object-contain" src="imagens/batata.jpg" alt="Batata Maluca">
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-center gap-2 mt-4">
+        <button onclick="prevSlide()" class="p-2 rounded-full bg-brand-black hover:bg-white/10 border border-white/10 text-white transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+        </button>
+        <button onclick="nextSlide()" class="p-2 rounded-full bg-brand-black hover:bg-white/10 border border-white/10 text-white transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section id="cardapio" class="py-16 px-4 max-w-7xl mx-auto">
+    <div class="text-center space-y-4 mb-12">
+      <span class="text-brand-red font-bold tracking-wider uppercase text-sm">Pratos Irresistíveis</span>
+      <h2 class="font-title font-black text-3xl sm:text-4xl lg:text-5xl">CARDÁPIO <span class="text-brand-yellow">DIGITAL</span></h2>
+      <p class="text-brand-gray max-w-2xl mx-auto">
+        Selecione a sua categoria preferida, explore os nossos sabores reais e monte o seu pedido com comodidade.
+      </p>
+
+      <div class="relative max-w-md mx-auto pt-4">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-4 pt-4 text-brand-gray">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </span>
+        <input type="text" id="menu-search" oninput="filterProducts()" placeholder="O que deseja comer hoje?" class="w-full bg-brand-card border border-white/10 rounded-xl pl-12 pr-4 py-3 text-white placeholder-brand-gray focus:outline-none focus:ring-2 focus:ring-brand-yellow transition-all">
+      </div>
+    </div>
+
+    <div class="flex overflow-x-auto pb-4 gap-2 scrollbar-none justify-start md:justify-center border-b border-white/10 mb-8" id="category-tabs-container"></div>
+
+    <div id="products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </section>
+
+  <section class="py-16 bg-gradient-to-r from-brand-black via-brand-dark to-brand-black border-y border-brand-yellow/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="space-y-6">
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-brand-yellow/10 rounded-full border border-brand-yellow/20 text-brand-yellow font-bold text-xs uppercase tracking-widest">
+          O Monstro do Sabor
+        </div>
+        <h2 class="font-title font-black text-3xl sm:text-4xl text-white">
+          CACHORRÃO <span class="text-brand-yellow">30 CENTÍMETROS</span>
+        </h2>
+        <p class="text-brand-gray leading-relaxed">
+          Preparado com pão artesanal ultra macio de 30cm e recheado generosamente com <span class="text-brand-yellow font-bold">18 ingredientes especiais</span> cuidadosamente dispostos para proporcionar a melhor harmonia de sabores.
+        </p>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs text-white/90">
+          <div class="flex items-center gap-2 bg-brand-card p-2 rounded-lg border border-white/5"><span class="text-brand-yellow">✓</span> Milho</div>
+          <div class="flex items-center gap-2 bg-brand-card p-2 rounded-lg border border-white/5"><span class="text-brand-yellow">✓</span> Ervilha</div>
+          <div class="flex items-center gap-2 bg-brand-card p-2 rounded-lg border border-white/5"><span class="text-brand-yellow">✓</span> Passas</div>
+          <div class="flex items-center gap-2 bg-brand-card p-2 rounded-lg border border-white/5"><span class="text-brand-yellow">✓</span> Ovo de Codorna</div>
+          <div class="flex items-center gap-2 bg-brand-card p-2 rounded-lg border border-white/5"><span class="text-brand-yellow">✓</span> Queijo Ralado</div>
+          <div class="flex items-center gap-2 bg-brand-card p-2 rounded-lg border border-white/5"><span class="text-brand-yellow">✓</span> Batata Palha</div>
+          <div class="flex items-center gap-2 bg-brand-card p-2 rounded-lg border border-white/5"><span class="text-brand-yellow">✓</span> Cheddar Cremoso</div>
+          <div class="flex items-center gap-2 bg-brand-card p-2 rounded-lg border border-white/5"><span class="text-brand-yellow">✓</span> Cebola Ralada</div>
+          <div class="flex items-center gap-2 bg-brand-card p-2 rounded-lg border border-white/5"><span class="text-brand-yellow">✓</span> Ketchup Premium</div>
+          <div class="flex items-center gap-2 bg-brand-card p-2 rounded-lg border border-white/5"><span class="text-brand-yellow">✓</span> Mostarda Especial</div>
+          <div class="flex items-center gap-2 bg-brand-card p-2 rounded-lg border border-white/5"><span class="text-brand-yellow">✓</span> Molho Barbecue</div>
+          <div class="flex items-center gap-2 bg-brand-card p-2 rounded-lg border border-white/5"><span class="text-brand-yellow">✓</span> Alface Fresca</div>
+          <div class="flex items-center gap-2 bg-brand-card p-2 rounded-lg border border-white/5"><span class="text-brand-yellow">✓</span> Molho Verde Secreto</div>
+          <div class="flex items-center gap-2 bg-brand-card p-2 rounded-lg border border-white/5"><span class="text-brand-yellow">✓</span> Maionese Suave</div>
+          <div class="flex items-center gap-2 bg-brand-card p-2 rounded-lg border border-white/5 font-bold text-brand-red"><span class="text-brand-red">✓</span> 2 Salsichas Grandes</div>
+        </div>
+
+        <div class="p-4 bg-brand-red/10 rounded-xl border border-brand-red/20 text-sm">
+          <span class="font-bold text-brand-red">OFERTA:</span> Na compra do Cachorrão em dias de promoção, ganhe um copo de <span class="font-bold text-brand-yellow">Guaracamp de brinde</span>!
+        </div>
+
+        <button onclick="scrollToCategory('cachorrao')" class="inline-flex items-center justify-center bg-brand-red hover:bg-brand-redHover text-white font-bold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg shadow-brand-red/20">
+          QUERO MEU CACHORRÃO
+        </button>
+      </div>
+
+      <div class="relative flex justify-center">
+        <div class="w-full max-w-sm bg-brand-card rounded-2xl p-6 border border-white/10 text-center space-y-4">
+          <div class="h-48 bg-brand-black rounded-xl overflow-hidden border border-white/5">
+            <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1619740455993-9e612b1af08a?auto=format&fit=crop&w=600&q=80" alt="">
+          </div>
+          <h3 class="font-title font-bold text-xl text-white">Escolha a sua versão:</h3>
+          <p class="text-xs text-brand-gray">Salsicha Tradicional, Salsicha Dupla, Linguiça Defumada ou Linguiça Dupla.</p>
+          <div class="text-2xl font-black text-brand-yellow">A partir de R$ 11,00</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center space-y-4 mb-12">
+      <span class="text-brand-yellow font-bold uppercase tracking-wider text-sm">Opinião de quem consome</span>
+      <h2 class="font-title font-black text-3xl">QUEM COMPRA, <span class="text-brand-red">RECOMENDA</span></h2>
+    </div>
+
+    <div id="reviews-container" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-brand-card p-6 rounded-2xl border border-white/5 space-y-4">
+        <div class="flex items-center gap-1 text-brand-yellow">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        </div>
+        <p class="text-sm text-white/80">"Melhor lanche de Nova Iguaçu com certeza! O Cachorrão de 30cm vem extremamente completo, os ingredientes são de primeira qualidade e a entrega na região foi super rápida."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-brand-yellow rounded-full flex items-center justify-center font-bold text-black text-xs">MT</div>
+          <div>
+            <span class="block text-sm font-bold">Mateus Torres</span>
+            <span class="block text-[10px] text-brand-gray">Cliente há 2 anos</span>
+          </div>
+        </div>
+      </div>
+      <div class="bg-brand-card p-6 rounded-2xl border border-white/5 space-y-4">
+        <div class="flex items-center gap-1 text-brand-yellow">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        </div>
+        <p class="text-sm text-white/80">"O combo casal com 2 X-Tudo e guaraná de 1L é disparado o melhor custo-benefício. Lanche caprichado, queijo super derretido e batata palha muito crocante."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-brand-red rounded-full flex items-center justify-center font-bold text-white text-xs">AS</div>
+          <div>
+            <span class="block text-sm font-bold">Aline Silva</span>
+            <span class="block text-[10px] text-brand-gray">Cliente Recorrente</span>
+          </div>
+        </div>
+      </div>
+      <div class="bg-brand-card p-6 rounded-2xl border border-white/5 space-y-4">
+        <div class="flex items-center gap-1 text-brand-yellow">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        </div>
+        <p class="text-sm text-white/80">"Minha família adora a Batata Maluca do Carioquinha. A porção média é enorme e vem super cheia de bacon, calabresa e cheddar. Super recomendo a todos aqui de Nova Iguaçu!"</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-brand-yellow rounded-full flex items-center justify-center font-bold text-black text-xs">RC</div>
+          <div>
+            <span class="block text-sm font-bold">Rodrigo Costa</span>
+            <span class="block text-[10px] text-brand-gray">Morador de Nova Iguaçu</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center pt-8">
+      <button onclick="openReviewModal()" class="bg-brand-card hover:bg-white/10 border border-white/10 px-6 py-3 rounded-xl text-sm font-bold transition-all inline-flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+        Deixar minha Avaliação
+      </button>
+    </div>
+  </section>
+
+  <div id="cart-sidebar" class="fixed inset-0 z-50 overflow-hidden hidden">
+    <div class="absolute inset-0 overflow-hidden">
+      <div onclick="toggleCart()" class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"></div>
+      <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+        <div class="pointer-events-auto w-screen max-w-md">
+          <div class="flex h-full flex-col bg-brand-dark border-l border-white/10 shadow-2xl">
+            <div class="p-6 bg-brand-black border-b border-white/10 flex items-center justify-between">
+              <h2 class="text-lg font-title font-black text-white flex items-center gap-2">
+                <svg class="w-6 h-6 text-brand-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                SEU CARRINHO (<span id="cart-items-count">0</span>)
+              </h2>
+              <button onclick="toggleCart()" class="p-2 rounded-full hover:bg-white/10 text-brand-gray hover:text-white transition-all">✕</button>
+            </div>
+            <div id="cart-items-list" class="flex-1 overflow-y-auto p-6 space-y-4"></div>
+            <div class="p-6 bg-brand-black border-t border-white/10 space-y-4">
+              <div class="flex items-center justify-between text-base font-bold text-white">
+                <span>Subtotal</span>
+                <span id="cart-total-value" class="text-brand-yellow">R$ 0,00</span>
+              </div>
+              <button onclick="openCheckoutModal()" class="w-full bg-brand-yellow hover:bg-brand-yellowHover text-black font-black py-4 rounded-xl text-center block transition-all duration-300 transform active:scale-95 glow-yellow">
+                PROSSEGUIR PARA CHECKOUT
+              </button>
+              <button onclick="toggleCart()" class="w-full bg-transparent hover:bg-white/5 border border-white/10 text-white font-semibold py-3 rounded-xl text-center text-xs transition-all">
+                Continuar Comprando
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="checkout-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+    <div class="flex min-h-screen items-end justify-center px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+      <div onclick="closeCheckoutModal()" class="fixed inset-0 bg-black/85 backdrop-blur-sm transition-opacity"></div>
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+
+      <div class="inline-block align-bottom bg-brand-dark rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border border-white/10">
+        <div class="p-6 space-y-6">
+          <div class="flex items-center justify-between border-b border-white/10 pb-4">
+            <h3 class="text-xl font-title font-black text-white flex items-center gap-2">
+              <svg class="w-6 h-6 text-brand-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+              FINALIZAR PEDIDO
+            </h3>
+            <button onclick="closeCheckoutModal()" class="text-brand-gray hover:text-white">✕</button>
+          </div>
+
+          <form id="checkout-form" onsubmit="handleSendOrder(event)" class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-brand-gray mb-1">Nome Completo *</label>
+              <input type="text" id="client-name" required placeholder="Digite seu nome..." class="w-full bg-brand-card border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-brand-yellow focus:outline-none transition-all">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-brand-gray mb-1">WhatsApp de Contato *</label>
+              <input type="tel" id="client-phone" required placeholder="(21) 99999-9999" class="w-full bg-brand-card border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-brand-yellow focus:outline-none transition-all">
+            </div>
+
+            <div class="space-y-4">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-brand-gray mb-1">CEP *</label>
+                <div class="flex gap-2">
+                  <input type="text" id="client-cep" required maxlength="9" placeholder="26000-000" onblur="buscarCEP(this.value)" class="w-full bg-brand-card border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-brand-yellow focus:outline-none transition-all">
+                  <button type="button" onclick="buscarCEP(document.getElementById('client-cep').value)" class="bg-brand-yellow text-black font-bold px-4 rounded-xl text-xs">BUSCAR</button>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-4 gap-2">
+                <div class="col-span-3">
+                  <label class="block text-xs font-bold uppercase tracking-wider text-brand-gray mb-1">Rua *</label>
+                  <input type="text" id="client-rua" required readonly class="w-full bg-brand-black border border-white/10 rounded-xl px-4 py-3 text-white/50 focus:outline-none">
+                </div>
+                <div class="col-span-1">
+                  <label class="block text-xs font-bold uppercase tracking-wider text-brand-gray mb-1">Nº *</label>
+                  <input type="text" id="client-numero" required class="w-full bg-brand-card border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-brand-yellow focus:outline-none">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-brand-gray mb-1">Bairro *</label>
+                  <input type="text" id="client-bairro" required readonly class="w-full bg-brand-black border border-white/10 rounded-xl px-4 py-3 text-white/50 focus:outline-none">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-brand-gray mb-1">Complemento</label>
+                  <input type="text" id="client-complemento" placeholder="Apto, Bloco..." class="w-full bg-brand-card border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-brand-yellow focus:outline-none">
+                </div>
+              </div>
+
+              <div id="box-taxa-entrega" class="hidden bg-brand-yellow/10 border border-brand-yellow/30 p-3 rounded-xl flex justify-between items-center">
+                <span class="text-xs font-bold text-brand-yellow uppercase">Taxa de Entrega:</span>
+                <span id="valor-taxa-display" class="text-lg font-black text-white">R$ 0,00</span>
+              </div>
+
+              <div id="box-total-final" class="hidden bg-brand-red/10 border border-brand-red/30 p-3 rounded-xl flex justify-between items-center mt-2">
+                <span class="text-xs font-bold text-brand-red uppercase">Total (Lanches + Taxa):</span>
+                <span id="valor-total-display" class="text-xl font-black text-white">R$ 0,00</span>
+              </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-brand-gray mb-1">Observações do Pedido</label>
+              <textarea id="client-notes" placeholder="Ex: Sem cebola, ponto da carne, trocar acompanhamento..." class="w-full bg-brand-card border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-brand-yellow focus:outline-none transition-all h-20 resize-none"></textarea>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-brand-gray mb-1">Forma de Pagamento *</label>
+              <select id="client-payment" onchange="toggleChangeInput()" required class="w-full bg-brand-card border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-brand-yellow focus:outline-none transition-all">
+                <option value="Pix">Pix</option>
+                <option value="Cartao-Debito">Cartão de Débito</option>
+                <option value="Cartao-Credito">Cartão de Crédito</option>
+                <option value="Alelo">Vale-Refeição Alelo</option>
+                <option value="Dinheiro">Dinheiro</option>
+              </select>
+            </div>
+
+            <div id="change-container" class="hidden">
+              <label class="block text-xs font-bold uppercase tracking-wider text-brand-gray mb-1">Precisa de troco?</label>
+              <input type="text" id="client-change" placeholder="Troco para quanto?" class="w-full bg-brand-card border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-brand-yellow focus:outline-none transition-all">
+            </div>
+
+            <div class="pt-4 border-t border-white/10 flex gap-4">
+              <button type="button" onclick="closeCheckoutModal()" class="w-1/2 bg-transparent hover:bg-white/5 border border-white/10 text-white font-bold py-3.5 rounded-xl transition-all">
+                Cancelar
+              </button>
+              <button type="submit" class="w-1/2 bg-green-600 hover:bg-green-700 text-white font-black py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 glow-red">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                ENVIAR PEDIDO
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="review-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+    <div class="flex min-h-screen items-center justify-center px-4">
+      <div onclick="closeReviewModal()" class="fixed inset-0 bg-black/80"></div>
+      <div class="bg-brand-dark p-6 rounded-2xl border border-white/10 max-w-md w-full relative z-10 space-y-4">
+        <h3 class="text-lg font-title font-bold text-brand-yellow">Avaliar Carioquinha Lanches</h3>
+        <form onsubmit="handleReview(event)" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-brand-gray">Seu Nome</label>
+            <input type="text" id="rev-name" required class="w-full bg-brand-card border border-white/10 rounded-xl p-3 text-white">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-brand-gray">Nota (Estrelas)</label>
+            <select id="rev-stars" class="w-full bg-brand-card border border-white/10 rounded-xl p-3 text-white">
+              <option value="5">Excelente</option>
+              <option value="4">Muito Bom</option>
+              <option value="3">Bom</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-brand-gray">Seu Comentário</label>
+            <textarea id="rev-comment" required class="w-full bg-brand-card border border-white/10 rounded-xl p-3 text-white h-24"></textarea>
+          </div>
+          <div class="flex gap-2">
+            <button type="button" onclick="closeReviewModal()" class="w-1/2 p-3 border border-white/10 rounded-xl">Cancelar</button>
+            <button type="submit" class="w-1/2 p-3 bg-brand-yellow text-black font-bold rounded-xl">Enviar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="admin-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+    <div class="flex min-h-screen items-center justify-center px-4">
+      <div onclick="closeAdminModal()" class="fixed inset-0 bg-black/90"></div>
+      
+      <div id="admin-login-box" class="bg-brand-dark p-8 rounded-2xl border border-white/10 max-w-sm w-full relative z-10 space-y-4">
+        <h3 class="text-xl font-title font-black text-brand-yellow text-center">ACESSO RESTRITO</h3>
+        <p class="text-xs text-brand-gray text-center">Insira o código de administrador para gerir o catálogo.</p>
+        <input type="password" id="admin-password" placeholder="Senha de Acesso" class="w-full bg-brand-card border border-white/10 rounded-xl p-3 text-white text-center">
+        <button onclick="handleAdminLogin()" class="w-full p-3 bg-brand-yellow text-black font-black rounded-xl">Acessar Painel</button>
+        <p class="text-center text-[10px] text-brand-gray">Dica: A senha inicial padrão é <span class="font-bold text-white">segundo maiusculo</span></p>
+      </div>
+
+      <div id="admin-dashboard-box" class="hidden bg-brand-dark p-6 rounded-2xl border border-white/10 max-w-4xl w-full relative z-10 space-y-6 max-h-[90vh] overflow-y-auto">
+        <div class="flex items-center justify-between border-b border-white/10 pb-4">
+          <h3 class="text-xl font-title font-black text-brand-yellow flex items-center gap-2">
+            PAINEL ADMINISTRATIVO CARIOQUINHA
+          </h3>
+          <button onclick="closeAdminModal()" class="text-brand-gray hover:text-white">Fechar [X]</button>
+        </div>
+
+        <div class="flex gap-2 overflow-x-auto pb-2 border-b border-white/5">
+          <button onclick="switchAdminTab('products')" class="admin-tab-btn px-4 py-2 bg-brand-yellow text-black font-bold rounded-lg text-sm">Gerenciar Produtos</button>
+          <button onclick="switchAdminTab('status')" class="admin-tab-btn px-4 py-2 bg-brand-card hover:bg-white/5 rounded-lg text-sm">Funcionamento</button>
+          <button onclick="switchAdminTab('reviews')" class="admin-tab-btn px-4 py-2 bg-brand-card hover:bg-white/5 rounded-lg text-sm">Comentários</button>
+        </div>
+
+        <div id="admin-tab-products" class="admin-tab-content space-y-4">
+          <div class="flex justify-between items-center">
+            <span class="text-sm font-bold text-white/80">Lista Geral de Produtos e Preços</span>
+            <button onclick="openAddNewProductForm()" class="bg-brand-yellow text-black text-xs font-bold px-3 py-1.5 rounded">Adicionar Produto</button>
+          </div>
+          <div id="admin-add-product-form" class="hidden bg-brand-card p-4 rounded-lg border border-brand-yellow/30 space-y-3">
+            <h4 class="text-xs font-bold text-brand-yellow uppercase">Novo Produto</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <input type="text" id="new-prod-name" placeholder="Nome" class="bg-brand-black p-2 rounded text-xs">
+              <input type="text" id="new-prod-cat" placeholder="Categoria (smash, combos-individual, combos-casal, cachorrao, batata, bebidas)" class="bg-brand-black p-2 rounded text-xs">
+              <input type="number" step="0.01" id="new-prod-price" placeholder="Preço" class="bg-brand-black p-2 rounded text-xs">
+              <input type="text" id="new-prod-desc" placeholder="Descrição/Ingredientes" class="bg-brand-black p-2 rounded text-xs">
+              <input type="text" id="new-prod-img" placeholder="Link da Imagem (Unsplash)" class="bg-brand-black p-2 rounded text-xs">
+            </div>
+            <div class="flex justify-end gap-2 text-xs">
+              <button onclick="closeAddNewProductForm()" class="bg-brand-gray text-black px-2 py-1 rounded">Cancelar</button>
+              <button onclick="saveNewProduct()" class="bg-green-600 text-white px-3 py-1 rounded">Salvar</button>
+            </div>
+          </div>
+          <div id="admin-products-list" class="space-y-2"></div>
+        </div>
+
+        <div id="admin-tab-status" class="admin-tab-content hidden space-y-4">
+          <h4 class="text-sm font-bold text-white">Horários de Funcionamento do Estabelecimento</h4>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs text-brand-gray mb-1">Dias de Semana (Seg, Qui)</label>
+              <input type="text" id="config-time-week" class="w-full bg-brand-card border border-white/10 rounded-lg p-2.5 text-xs text-white">
+            </div>
+            <div>
+              <label class="block text-xs text-brand-gray mb-1">Finais de Semana (Sex, Sab, Dom)</label>
+              <input type="text" id="config-time-weekend" class="w-full bg-brand-card border border-white/10 rounded-lg p-2.5 text-xs text-white">
+            </div>
+          </div>
+          <div class="pt-4">
+            <button onclick="saveAdminConfig()" class="w-full bg-brand-yellow text-black font-bold p-3 rounded-xl text-xs uppercase">Salvar Configurações</button>
+          </div>
+        </div>
+
+        <div id="admin-tab-reviews" class="admin-tab-content hidden space-y-4">
+          <div class="flex justify-between items-center">
+            <span class="text-sm font-bold text-white/80">Avaliações Recebidas</span>
+            <button onclick="clearAllReviews()" class="bg-brand-red text-white text-xs px-2 py-1 rounded">Limpar Todas</button>
+          </div>
+          <div id="admin-reviews-list" class="space-y-2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="custom-toast" class="fixed bottom-24 left-1/2 transform -translate-x-1/2 z-50 bg-brand-yellow text-black font-black px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3 transition-all duration-300 translate-y-20 opacity-0 pointer-events-none">
+    <span id="toast-icon">
+      <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+    </span>
+    <span id="toast-message">Item adicionado com sucesso!</span>
+  </div>
+
+  <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-3">
+    <a href="https://wa.me/5521983116477" target="_blank" class="bg-green-600 hover:bg-green-500 text-white p-4 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-110 flex items-center justify-center glow-red" aria-label="Enviar mensagem WhatsApp">
+      <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24">
+        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.963C16.588 1.981 14.115.95c-5.44 0-9.866 4.369-9.87 9.799-.001 1.702.461 3.361 1.339 4.815L1.824 21.67l6.221-1.611z"/>
+      </svg>
+    </a>
+  </div>
+
+  <footer class="bg-brand-black border-t border-white/10 py-12 px-4">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="space-y-4 md:col-span-2">
+        <div class="flex items-center gap-3">
+          <div class="w-14 h-14 rounded-full overflow-hidden border border-brand-yellow/30 bg-brand-black flex items-center justify-center">
+            <img src="imagens/logo.jpg" alt="" class="w-full h-full object-cover">
+          </div>
+          <div>
+            <span class="font-title font-black text-lg text-brand-yellow">FOOD TRUCK CARIOQUINHA</span>
+            <span class="block text-xs text-brand-gray">Desde 2010 o melhor lanche de Nova Iguaçu</span>
+          </div>
+        </div>
+        <p class="text-sm text-brand-gray">Ingredientes de qualidade superior, higiene exemplar e lanches que surpreendem seu apetite. Peça online e receba na hora.</p>
+      </div>
+
+      <div>
+        <h4 class="font-title font-bold text-white mb-4 uppercase text-xs tracking-wider">Categorias</h4>
+        <ul class="space-y-2 text-sm text-brand-gray">
+          <li><button onclick="scrollToCategory('smash')" class="hover:text-brand-yellow transition-colors text-left">Smash Burgers</button></li>
+          <li><button onclick="scrollToCategory('combos-individual')" class="hover:text-brand-yellow transition-colors text-left">Combos Individuais</button></li>
+          <li><button onclick="scrollToCategory('combos-casal')" class="hover:text-brand-yellow transition-colors text-left">Combos Casal</button></li>
+          <li><button onclick="scrollToCategory('cachorrao')" class="hover:text-brand-yellow transition-colors text-left">Cachorrão 30cm</button></li>
+          <li><button onclick="scrollToCategory('batata')" class="hover:text-brand-yellow transition-colors text-left">Batata Maluca</button></li>
+        </ul>
+      </div>
+
+      <div class="space-y-4">
+        <h4 class="font-title font-bold text-white uppercase text-xs tracking-wider">Contacto & Delivery</h4>
+        <p class="text-sm text-brand-gray">📞 (21) 98311-6477</p>
+        <p class="text-sm text-brand-gray">📍 R. Alagoas, 00 - Praça do Carioquinha, Nova Iguaçu - RJ</p>
+        <div class="pt-4 flex gap-3">
+          <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-bold">VISA</span>
+          <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-bold">MASTER</span>
+          <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-bold">ELO</span>
+          <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-bold">ALELO</span>
+        </div>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto mt-8 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-xs text-brand-gray">&copy; 2026 Food Truck Carioquinha. Todos os direitos reservados.</p>
+      <button onclick="openAdminModal()" class="text-[10px] text-white/20 hover:text-brand-yellow transition-all flex items-center gap-1">⚙ Painel Administrativo</button>
+    </div>
+  </footer>
+
+  <script>
+    // =================================================================
+    // 1. DADOS DOS PRODUTOS
+    // =================================================================
+    const defaultProducts = [
+      { id: 'smash-1', name: 'Smash Burger', price: 12.00, category: 'smash', description: 'Pão, carne smash prensada de 100g, queijo e molho da casa.', image: 'imagens/smash_burger.jpg' },
+      { id: 'smash-2', name: 'Smash Burger Cheddar', price: 15.00, category: 'smash', description: 'Pão, carne smash de 100g, cheddar cremoso derretido.', image: 'imagens/smash_burger_cheddar.jpg', alt: 'Smash Burger Cheddar', class: 'w-[398px] h-[192px] object-cover bg-white rounded-xl' },
+      { id: 'smash-3', name: 'Smash Duplo Cheddar', price: 20.00, category: 'smash', description: 'Pão, duas carnes smash de 100g cada, muito cheddar.', image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80' },
+      { id: 'smash-4', name: 'Smash Duplo Bacon', price: 26.00, category: 'smash', description: 'Duas carnes smash de 100g, queijo, bacon crocante e barbecue.', image: 'https://images.unsplash.com/photo-1553979459-d2229ba7433b?auto=format&fit=crop&w=600&q=80' },
+      
+      { id: 'combo-ind-1', name: 'Smash + Batata + Refrigerante', price: 22.00, category: 'combos-individual', description: '1 Smash Burger completo + Porção de Batata Frita individual + Refrigerante Lata.', image: 'https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=600&q=80' },
+      { id: 'combo-ind-2', name: 'Smash Cheddar + Batata + Refrigerante', price: 25.00, category: 'combos-individual', description: '1 Smash Cheddar + Porção de Batata Frita + Refrigerante Lata.', image: 'https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=600&q=80' },
+      { id: 'combo-ind-3', name: 'Smash Duplo Cheddar + Batata + Refrigerante', price: 30.00, category: 'combos-individual', description: '1 Smash Duplo Cheddar completo + Batata Individual + Refrigerante Lata.', image: 'https://images.unsplash.com/photo-1610614819513-58e34989848b?auto=format&fit=crop&w=600&q=80' },
+      { id: 'combo-ind-4', name: 'Smash Duplo Bacon + Batata + Refrigerante', price: 36.00, category: 'combos-individual', description: '1 Smash Duplo Bacon completo + Batata Frita + Refrigerante Lata.', image: 'https://images.unsplash.com/photo-1610614819513-58e34989848b?auto=format&fit=crop&w=600&q=80' },
+      
+      { id: 'combo-casal-1', name: '2 X-Tudo + Refri 1L (Antarctica)', price: 29.00, category: 'combos-casal', description: 'Dois gigantescos X-Tudo + 1 Garrafa de Guaraná Antarctica de 1 Litro.', image: 'imagens/xtudo_refri.jpg' },
+      { id: 'combo-casal-2', name: '2 Duplo Cheddar + Refri 1L (Antarctica)', price: 29.00, category: 'combos-casal', description: 'Dois hambúrgueres Duplo Cheddar + 1 Guaraná Antarctica de 1 Litro.', image: 'imagens/cheddar_refri.jpg' },
+      { id: 'combo-casal-3', name: '2 X-Tudo + Batata Maluca P + Refri 1L', price: 42.00, category: 'combos-casal', description: 'Dois deliciosos X-Tudo + 1 Batata Maluca Pequena completa + Refri 1L Antarctica.', image: 'imagens/xtudo_refri_batata.jpg' },
+      { id: 'combo-casal-4', name: '2 X-Montanha + Refri 1L (Antarctica)', price: 43.00, category: 'combos-casal', description: 'Dois lanches colossais X-Montanha + Guaraná Antarctica de 1 Litro.', image: 'imagens/montanha_refri.jpg' },
+      { id: 'combo-casal-5', name: '2 Salsicha + Refri 1L (Antarctica)', price: 29.00, category: 'combos-casal', description: 'Dois deliciosos Cachorros de Salsicha + Guaraná Antarctica de 1 Litro.', image: 'imagens/salsicha_refri.jpg' },
+      { id: 'combo-casal-6', name: '1 X-Tudo + 1 Salsicha + Refri 1L', price: 28.00, category: 'combos-casal', description: 'O melhor de dois mundos: 1 X-Tudo completo + 1 Cachorro de Salsicha + Refri 1L.', image: 'imagens/xtudo_salsicha_refri.jpg' },
+
+      { id: 'cachorrao-1', name: 'Cachorrão Salsicha', price: 20.00, category: 'cachorrao', description: 'Pão de 30cm com Salsicha e todos os 18 acompanhamentos da casa.', image: 'https://images.unsplash.com/photo-1619740455993-9e612b1af08a?auto=format&fit=crop&w=600&q=80' },
+      { id: 'cachorrao-2', name: 'Cachorrão Linguiça', price: 23.00, category: 'cachorrao', description: 'Pão de 30cm com Linguiça e acompanhamentos da casa.', image: 'https://images.unsplash.com/photo-1619740455993-9e612b1af08a?auto=format&fit=crop&w=600&q=80' },
+
+      { id: 'cachorro-1', name: 'Cachorro quente Salsicha', price: 11.00, category: 'cachorro', description: 'cachorro quente comum e todos os 18 acompanhamentos da casa.', image: 'imagens/cachorro_comum.jpg' },
+      { id: 'cachorro-2', name: 'Cachorro quente Salsicha Duplo', price: 13.00, category: 'cachorro', description: 'cachorro quente comum com 2 Salsichas gigantes e todos os 18 acompanhamentos.', image: 'imagens/cachorro_comum.jpg' },
+      { id: 'cachorro-3', name: 'Cachorro quente Linguiça', price: 12.00, category: 'cachorro', description: 'Pão de cachorro quente comum com Linguiça e acompanhamentos da casa.', image: 'imagens/cachorro_comum.jpg' },
+      { id: 'cachorro-4', name: 'Cachorro quente Linguiça Duplo', price: 14.00, category: 'cachorro', description: 'Para grandes fomes! cachorro quente comum com 2 Linguiças defumadas e acompanhamentos.', image: 'imagens/cachorro_comum.jpg' },
+
+      { id: 'batata-1', name: 'Batata Maluca Pequena', price: 16.00, category: 'batata', description: 'Batata frita sequinha e crocante, coberta com Cheddar, Calabresa, Bacon e queijo ralado.', image: 'imagens/batata.jpg' },
+      { id: 'batata-2', name: 'Batata Maluca Média', price: 19.00, category: 'batata', description: 'Batata frita perfeita para compartilhar, coberta com Cheddar, Calabresa, Bacon e queijo ralado.', image: 'imagens/batata.jpg' },
+      { id: 'batata-3', name: 'Batata Maluca Grande', price: 23.00, category: 'batata', description: 'Nossa maior porção! Turbinada com Cheddar cremoso, Calabresa, muito Bacon e queijo ralado.', image: 'imagens/batata.jpg' },
+
+      { 
+        id: 'classico-1', 
+        name: 'Nº 1 Hamburguer', 
+        category: 'sanduiches-classicos', 
+        description: 'Pão, Carne, Ketchup, Molho Especial, Salada e Batata Palha.',
+        image: 'imagens/hamburguer.jpg',
+        hasVariants: true,
+        variants: [
+          { name: 'Carne', price: 8.00 },
+          { name: 'Frango', price: 10.00 },
+          { name: 'Picanha', price: 12.00 },
+          { name: 'Combo Carne c/ Guaravita', price: 13.00 },
+          { name: 'Combo Frango c/ Guaravita', price: 15.00 },
+          { name: 'Combo Picanha c/ Guaravita', price: 17.00 }
+        ]
+      },
+      { 
+        id: 'classico-2', 
+        name: 'Nº 2 X-Burguer', 
+        category: 'sanduiches-classicos', 
+        description: 'Pão, Carne, 2 Queijos de primeira, Ketchup, Molho Especial, Salada e Batata Palha.',
+        image: 'imagens/xburguer.jpg',
+        hasVariants: true,
+        variants: [
+          { name: 'Carne', price: 9.00 },
+          { name: 'Frango', price: 11.00 },
+          { name: 'Picanha', price: 13.00 },
+          { name: 'Combo Carne c/ Guaravita', price: 15.00 },
+          { name: 'Combo Frango c/ Guaravita', price: 17.00 },
+          { name: 'Combo Picanha c/ Guaravita', price: 19.00 }
+        ]
+      },
+      { 
+        id: 'classico-3', 
+        name: 'Nº 3 X-Bacon', 
+        category: 'sanduiches-classicos', 
+        description: 'Pão, Carne, Queijo, Ovo, Bacon, Ketchup, Molho Especial, Salada e Batata Palha.',
+        image: 'imagens/xbacon.jpg',
+        hasVariants: true,
+        variants: [
+          { name: 'Carne', price: 13.00 },
+          { name: 'Frango', price: 15.00 },
+          { name: 'Picanha', price: 17.00 },
+          { name: 'Combo Carne c/ Guaravita', price: 19.00 },
+          { name: 'Combo Frango c/ Guaravita', price: 21.00 },
+          { name: 'Combo Picanha c/ Guaravita', price: 23.00 }
+        ]
+      },
+      { 
+        id: 'classico-4', 
+        name: 'Nº 4 X-Egg', 
+        category: 'sanduiches-classicos', 
+        description: 'Pão, Carne, Queijo, 2 Ovos, Ketchup, Molho Especial, Salada e Batata Palha.',
+        image: 'imagens/xegg.jpg',
+        hasVariants: true,
+        variants: [
+          { name: 'Carne', price: 13.50 },
+          { name: 'Frango', price: 15.00 },
+          { name: 'Picanha', price: 17.00 },
+          { name: 'Combo Carne c/ Guaravita', price: 18.00 },
+          { name: 'Combo Frango c/ Guaravita', price: 20.00 },
+          { name: 'Combo Picanha c/ Guaravita', price: 22.00 }
+        ]
+      },
+      { 
+        id: 'classico-5', 
+        name: 'Nº 5 X-Tudo', 
+        category: 'sanduiches-classicos', 
+        description: 'Pão de hambúrguer, Carne, Queijo, Presunto, Ovo, Bacon, Ketchup, Molho Especial, Salada e Batata Palha.',
+        image: 'imagens/xtudo.jpg',
+        hasVariants: true,
+        variants: [
+          { name: 'Carne', price: 11.00 },
+          { name: 'Frango', price: 13.50 },
+          { name: 'Picanha', price: 15.50 },
+          { name: 'Combo Carne c/ Guaravita', price: 17.00 },
+          { name: 'Combo Frango c/ Guaravita', price: 19.00 },
+          { name: 'Combo Picanha c/ Guaravita', price: 21.00 }
+        ]
+      },
+      { 
+        id: 'classico-6', 
+        name: 'Nº 6 X-Duplo', 
+        category: 'sanduiches-classicos', 
+        description: 'Pão, 2 Carnes, Queijo, Presunto, Ovo, Bacon, Ketchup, Molho Especial, Salada e Batata Palha.',
+        image: 'imagens/xduplo.jpg',
+        hasVariants: true,
+        variants: [
+          { name: 'Carne', price: 14.00 },
+          { name: 'Frango', price: 18.00 },
+          { name: 'Picanha', price: 22.00 },
+          { name: 'Combo Carne c/ Guaravita', price: 20.00 },
+          { name: 'Combo Frango c/ Guaravita', price: 24.00 },
+          { name: 'Combo Picanha c/ Guaravita', price: 28.00 }
+        ]
+      },
+      { 
+        id: 'classico-7', 
+        name: 'Nº 7 X-Cheddar', 
+        category: 'sanduiches-classicos', 
+        description: 'Pão, Carne, Queijo, Cheddar, Ketchup, Molho Especial, Salada e Batata Palha.',
+        image: 'imagens/xcheddar.jpg',
+        hasVariants: true,
+        variants: [
+          { name: 'Carne', price: 11.00 },
+          { name: 'Frango', price: 13.00 },
+          { name: 'Picanha', price: 15.00 },
+          { name: 'Combo Carne c/ Guaravita', price: 17.00 },
+          { name: 'Combo Frango c/ Guaravita', price: 19.00 },
+          { name: 'Combo Picanha c/ Guaravita', price: 21.00 }
+        ]
+      },
+      { 
+        id: 'classico-8', 
+        name: 'Nº 8 X-Calabresa', 
+        category: 'sanduiches-classicos', 
+        description: 'Pão, Carne, Queijo, Ovo, Calabresa, Ketchup, Molho Especial, Salada e Batata Palha.',
+        image: 'imagens/xcalabresa.jpg',
+        hasVariants: true,
+        variants: [
+          { name: 'Carne', price: 11.50 },
+          { name: 'Frango', price: 13.00 },
+          { name: 'Picanha', price: 15.00 },
+          { name: 'Combo Carne c/ Guaravita', price: 18.00 },
+          { name: 'Combo Frango c/ Guaravita', price: 20.00 },
+          { name: 'Combo Picanha c/ Guaravita', price: 22.00 }
+        ]
+      },
+      { 
+        id: 'classico-9', 
+        name: 'Nº 9 X-Montanha', 
+        category: 'sanduiches-classicos', 
+        description: 'Pão, 2 Carnes, Queijo Muçarela, 2 Presuntos, 2 Ovos, 2 Bacons, Cheddar, Ketchup, Molho Especial, Salada e Batata Palha.',
+        image: 'imagens/montanha.jpg',
+        hasVariants: true,
+        variants: [
+          { name: 'Carne', price: 18.00 },
+          { name: 'Frango', price: 22.00 },
+          { name: 'Picanha', price: 26.00 },
+          { name: 'Combo Carne c/ Guaravita', price: 24.00 },
+          { name: 'Combo Frango c/ Guaravita', price: 28.00 },
+          { name: 'Combo Picanha c/ Guaravita', price: 32.00 }
+        ]
+      },
+      { 
+        id: 'classico-10', 
+        name: 'Nº 10 X-Matador', 
+        category: 'sanduiches-classicos', 
+        description: 'Pão, 3 Carnes, 2 Queijos Muçarela, 3 Presuntos, 3 Ovos, 3 Bacons, Cheddar, Ketchup, Molho Especial, Salada e Batata Palha.',
+        image: 'imagens/matador.jpg',
+        hasVariants: true,
+        variants: [
+          { name: 'Carne', price: 26.00 },
+          { name: 'Frango', price: 33.00 },
+          { name: 'Picanha', price: 39.00 },
+          { name: 'Combo Carne c/ Guaravita', price: 30.00 },
+          { name: 'Combo Frango c/ Guaravita', price: 36.00 },
+          { name: 'Combo Picanha c/ Guaravita', price: 42.00 }
+        ]
+      },
+
+      { 
+        id: 'bebida-vitamina', 
+        name: 'Vitamina ao Leite', 
+        category: 'bebidas', 
+        description: 'Sabores: Morango, Abacaxi, Cupuaçu, Acerola, Graviola. (Nota: Maracujá custa + R$ 2,00).',
+        image: 'imagens/suco.jpg',
+        hasVariants: true,
+        variants: [
+          { name: 'Vitamina - 400ml', price: 11.00 },
+          { name: 'Vitamina - 500ml', price: 13.00 },
+          { name: 'Vitamina - 700ml', price: 15.00 },
+          { name: 'Vitamina Maracujá - 400ml', price: 13.00 },
+          { name: 'Vitamina Maracujá - 500ml', price: 15.00 },
+          { name: 'Vitamina Maracujá - 700ml', price: 17.00 }
+        ]
+      },
+      { 
+        id: 'bebida-suco', 
+        name: 'Suco Natural', 
+        category: 'bebidas', 
+        description: 'Sabores: Morango, Abacaxi, Cupuaçu, Graviola. (Nota: Maracujá custa + R$ 2,00).',
+        image: 'imagens/suco.jpg',
+        hasVariants: true,
+        variants: [
+          { name: 'Suco - 300ml', price: 9.00 },
+          { name: 'Suco - 500ml', price: 11.00 },
+          { name: 'Suco - 1 Litro', price: 14.00 },
+          { name: 'Suco Maracujá - 300ml', price: 11.00 },
+          { name: 'Suco Maracujá - 500ml', price: 13.00 },
+          { name: 'Suco Maracujá - 1 Litro', price: 16.00 }
+        ]
+      },
+
+      { id: 'bebida-gen-1', name: 'GUARACAMP', price: 2.50, category: 'bebidas', description: 'Copo tradicional de Guaraná natural de 285ml.', image: 'imagens/guaracamp.jpg' },
+      { id: 'bebida-gen-2', name: 'ÁGUA SEM GÁS', price: 2.50, category: 'bebidas', description: 'Água mineral natural fresca.', image: 'imagens/agua_sem_gas.jpg' },
+      { id: 'bebida-gen-3', name: 'ÁGUA COM GÁS', price: 3.50, category: 'bebidas', description: 'Água mineral gaseificada.', image: 'imagens/agua_com_gas.jpg' },
+      { id: 'bebida-gen-4', name: 'REFRI LATA', price: 6.00, category: 'bebidas', description: 'Sabor de refrigerante lata bem gelado.', image: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=600&q=80' },
+      { id: 'bebida-gen-5', name: 'Guaraná Antarctica 1L', price: 7.50, category: 'bebidas', description: 'Refrigerante Antarctica 1 Litro.', image: 'imagens/guarana.jpg' },
+      { id: 'bebida-gen-6', name: 'CLIPER 2L', price: 7.50, category: 'bebidas', description: 'Refrigerante sabor guaraná garrafa de 2 litros.', image: 'imagens/cliper.jpg' },
+      { id: 'bebida-gen-7', name: 'REFRI KUAT 2L', price: 10.00, category: 'bebidas', description: 'Refrigerante de Guaraná Kuat refrescante.', image: 'imagens/kuat.jpg' },
+      { id: 'bebida-gen-8', name: 'COCA-COLA 2L', price: 14.00, category: 'bebidas', description: 'Garrafa de refrigerante cola 2 litros bem fresca.', image: 'imagens/coca-cola.jpg' }
+    ];
+
+    const categoryNames = {
+      'smash': 'Smash Burgers',
+      'combos-individual': 'Combos Individuais',
+      'combos-casal': 'Combos Casal',
+      'cachorrao': 'Cachorrão 30cm',
+      'cachorro': 'Cachorro-Quente',
+      'batata': 'Batata Maluca',
+      'sanduiches-classicos': 'Sanduiches Clássicos',
+      'bebidas': 'Bebidas e Sucos'
+    };
+
+    // =================================================================
+    // 2. ESTADO DA APLICAÇÃO
+    // =================================================================
+    let products = [];
+    let cart = [];
+    let activeCategory = 'all';
+    let promoIndex = 0;
+    let reviews = [];
+    let toastTimeout = null;
+    
+    // Variáveis globais para o cálculo do frete atual
+    let taxaEntregaCalculada = 0;
+    let distanciaCalculada = 0;
+    let ruaFixaAtual = false;
+
+    let storeConfig = {
+      weekTime: "das 18:00 às 00:00 Hs",
+      weekendTime: "das 18:00 às 01:00 Hs",
+      closedDay: 2 // Terça-feira
+    };
+
+    const dbVersion = '9.4'; // Atualizado para forçar recarregamento do novo sistema
+
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('img[src="batata.jpg"]').forEach(img => img.src = 'imagens/batata.jpg');
+
+      if (localStorage.getItem('carioquinha_db_version') !== dbVersion) {
+        localStorage.setItem('carioquinha_products', JSON.stringify(defaultProducts));
+        localStorage.setItem('carioquinha_db_version', dbVersion);
+      }
+      if (!localStorage.getItem('carioquinha_products')) {
+        localStorage.setItem('carioquinha_products', JSON.stringify(defaultProducts));
+        localStorage.setItem('carioquinha_db_version', dbVersion);
+      }
+      products = JSON.parse(localStorage.getItem('carioquinha_products'));
+
+      if (!localStorage.getItem('carioquinha_config')) {
+        localStorage.setItem('carioquinha_config', JSON.stringify(storeConfig));
+      }
+      storeConfig = JSON.parse(localStorage.getItem('carioquinha_config'));
+
+      if (!localStorage.getItem('carioquinha_reviews')) {
+        localStorage.setItem('carioquinha_reviews', JSON.stringify([]));
+      }
+      reviews = JSON.parse(localStorage.getItem('carioquinha_reviews'));
+
+      renderCategoryTabs();
+      renderProducts();
+      checkStoreStatus();
+      updateCartDisplay();
+      initPromoCarousel();
+    });
+
+    // =================================================================
+    // 3. FUNÇÕES GERAIS E INTERFACE
+    // =================================================================
+    function checkStoreStatus() {
+      const now = new Date();
+      const currentDay = now.getDay();
+      const currentHour = now.getHours();
+      const currentMinutes = now.getMinutes();
+      const totalMinutes = (currentHour * 60) + currentMinutes;
+
+      let isOpen = false;
+      let reason = "FECHADO NO MOMENTO - Retornamos às 18:00h";
+
+      if (currentDay === storeConfig.closedDay) {
+        isOpen = false;
+        reason = "FECHADO ÀS TERÇAS-FEIRAS";
+      } else {
+        const startMinutes = 18 * 60;
+        let endMinutes = 0;
+
+        if (currentDay === 5 || currentDay === 6 || currentDay === 0) {
+          endMinutes = (1 * 60); 
+        } else {
+          endMinutes = 0;
+        }
+
+        if (totalMinutes >= startMinutes || (totalMinutes < endMinutes)) {
+          isOpen = true;
+          reason = "ABERTO AGORA - Faça seu Pedido!";
+        }
+      }
+
+      const statusBar = document.getElementById('status-bar');
+      const statusText = document.getElementById('status-text');
+
+      if (isOpen) {
+        statusBar.className = "bg-green-600 text-white py-2 px-4 text-center text-sm font-bold tracking-wider transition-all duration-300";
+        statusText.innerText = reason;
+      } else {
+        statusBar.className = "bg-brand-red text-white py-2 px-4 text-center text-sm font-bold tracking-wider transition-all duration-300";
+        statusText.innerText = reason;
+      }
+    }
+
+    function initPromoCarousel() {
+      showSlide(promoIndex);
+      setInterval(() => { nextSlide(); }, 5000);
+    }
+
+    function showSlide(index) {
+      const slides = document.querySelectorAll('.promo-slide');
+      slides.forEach((slide, idx) => {
+        if (idx === index) slide.classList.remove('hidden');
+        else slide.classList.add('hidden');
+      });
+    }
+
+    function nextSlide() {
+      const slides = document.querySelectorAll('.promo-slide');
+      promoIndex = (promoIndex + 1) % slides.length;
+      showSlide(promoIndex);
+    }
+
+    function prevSlide() {
+      const slides = document.querySelectorAll('.promo-slide');
+      promoIndex = (promoIndex - 1 + slides.length) % slides.length;
+      showSlide(promoIndex);
+    }
+
+    function renderCategoryTabs() {
+      const container = document.getElementById('category-tabs-container');
+      let html = `<button onclick="setCategory('all')" class="px-5 py-2.5 rounded-full font-bold text-sm whitespace-nowrap transition-all duration-300 ${activeCategory === 'all' ? 'bg-brand-yellow text-black' : 'bg-brand-card hover:bg-white/5 text-white/80'}">Todas</button>`;
+      for (const [key, value] of Object.entries(categoryNames)) {
+        html += `<button onclick="setCategory('${key}')" class="px-5 py-2.5 rounded-full font-bold text-sm whitespace-nowrap transition-all duration-300 ${activeCategory === key ? 'bg-brand-yellow text-black' : 'bg-brand-card hover:bg-white/5 text-white/80'}">${value}</button>`;
+      }
+      container.innerHTML = html;
+    }
+
+    function setCategory(cat) {
+      activeCategory = cat;
+      renderCategoryTabs();
+      renderProducts();
+    }
+
+    function scrollToCategory(cat) {
+      setCategory(cat);
+      document.getElementById('cardapio').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function renderProducts() {
+      const grid = document.getElementById('products-grid');
+      const searchQuery = document.getElementById('menu-search').value.toLowerCase();
+      grid.innerHTML = '';
+
+      const filtered = products.filter(p => {
+        const matchesCategory = activeCategory === 'all' || p.category === activeCategory;
+        const matchesSearch = p.name.toLowerCase().includes(searchQuery) || (p.description && p.description.toLowerCase().includes(searchQuery));
+        return matchesCategory && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full text-center py-12 space-y-2">
+            <svg class="w-12 h-12 text-brand-gray mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            <p class="text-brand-gray font-bold text-sm">Nenhum lanche encontrado com este nome.</p>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(p => {
+        let priceHtml = '';
+        let buttonActionHtml = '';
+
+        if (p.hasVariants && p.variants) {
+          priceHtml = `<span class="text-xs text-brand-yellow font-bold uppercase tracking-wider block mb-2">Opções Disponíveis</span>`;
+          let variantSelectOptions = '';
+          p.variants.forEach((v, index) => {
+            variantSelectOptions += `<option value="${index}">${v.name} - R$ ${v.price.toFixed(2).replace('.', ',')}</option>`;
+          });
+          priceHtml += `
+            <select id="variant-select-${p.id}" class="w-full bg-brand-black border border-white/10 rounded-lg p-2 text-xs text-white focus:outline-none mb-3">
+              ${variantSelectOptions}
+            </select>
+          `;
+          buttonActionHtml = `
+            <button onclick="addVariantToCart('${p.id}')" class="w-full bg-brand-yellow hover:bg-brand-yellowHover text-black font-black py-2.5 rounded-xl transition-all flex items-center justify-center gap-2 text-xs">
+              Adicionar Item
+            </button>
+          `;
+        } else {
+          priceHtml = `
+            <div class="flex items-baseline gap-1">
+              <span class="text-xs text-brand-gray">R$</span>
+              <span class="text-2xl font-black text-brand-yellow">${p.price.toFixed(2).replace('.', ',')}</span>
+            </div>
+          `;
+          buttonActionHtml = `
+            <button onclick="addToCart('${p.id}', '${p.name}', ${p.price})" class="w-full bg-brand-yellow hover:bg-brand-yellowHover text-black font-black py-2.5 rounded-xl transition-all flex items-center justify-center gap-2 text-xs">
+              Adicionar ao Carrinho
+            </button>
+          `;
+        }
+
+        let imageHtml = '';
+        if (p.image === 'suco.jpg') {
+          const isVitamina = p.id === 'bebida-vitamina';
+          const bgGradient = isVitamina 
+            ? 'bg-gradient-to-tr from-rose-100 via-amber-50 to-rose-200' 
+            : 'bg-gradient-to-tr from-amber-100 via-orange-50 to-yellow-200';
+          const imgAlignClass = isVitamina ? 'left-0 origin-left' : 'right-0 origin-right';
+          imageHtml = `
+            <div class="h-48 w-full ${bgGradient} relative overflow-hidden flex items-center justify-center">
+              <img src="suco.jpg" alt="" class="absolute ${imgAlignClass} w-[200%] h-full object-cover mix-blend-multiply p-2">
+            </div>
+          `;
+        } else {
+          imageHtml = `
+            <div class="h-48 w-full overflow-hidden relative bg-brand-black">
+              <img src="${p.image || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80'}" alt="" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80'">
+            </div>
+          `;
+        }
+
+        const card = document.createElement('div');
+        card.className = "bg-brand-card rounded-2xl border border-white/5 flex flex-col justify-between overflow-hidden hover:border-brand-yellow/30 transition-all duration-300 transform hover:-translate-y-1";
+        card.innerHTML = `
+          ${imageHtml}
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-2">
+                <span class="bg-white/5 border border-white/10 text-brand-gray text-[10px] uppercase font-bold px-2 py-1 rounded-full">${categoryNames[p.category] || p.category}</span>
+              </div>
+              <h3 class="font-title font-bold text-lg text-white mb-2">${p.name}</h3>
+              <p class="text-xs text-brand-gray mb-4 min-h-[40px] leading-relaxed">${p.description || 'Ingredientes selecionados da melhor qualidade.'}</p>
+            </div>
+            <div>
+              <div class="border-t border-white/5 pt-4 mt-2">
+                ${priceHtml}
+                <div class="mt-2">
+                  ${buttonActionHtml}
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function filterProducts() {
+      renderProducts();
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('custom-toast');
+      const toastMsg = document.getElementById('toast-message');
+      
+      if (toastTimeout) clearTimeout(toastTimeout);
+      
+      toastMsg.innerText = message;
+      
+      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+      
+      toastTimeout = setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+      }, 5000); 
+    }
+
+    // =================================================================
+    // 4. CARRINHO DE COMPRAS
+    // =================================================================
+    function addToCart(id, name, price) {
+      const existing = cart.find(item => item.id === id);
+      if (existing) existing.quantity += 1;
+      else cart.push({ id, name, price, quantity: 1 });
+      updateCartDisplay();
+      showToast("Foi adicionado com sucesso, o seu produto no carrinho");
+    }
+
+    function addVariantToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      const select = document.getElementById(`variant-select-${productId}`);
+      const variantIndex = select.value;
+      const selectedVariant = product.variants[variantIndex];
+      const itemUniqueId = `${productId}-${variantIndex}`;
+      const existing = cart.find(item => item.id === itemUniqueId);
+
+      if (existing) existing.quantity += 1;
+      else cart.push({ id: itemUniqueId, name: `${product.name} (${selectedVariant.name})`, price: selectedVariant.price, quantity: 1 });
+      
+      updateCartDisplay();
+      showToast("Foi adicionado com sucesso, o seu produto no carrinho");
+    }
+
+    function updateCartDisplay() {
+      const list = document.getElementById('cart-items-list');
+      const countBadge = document.getElementById('cart-count');
+      const sidebarItemsCount = document.getElementById('cart-items-count');
+      const totalValueContainer = document.getElementById('cart-total-value');
+
+      list.innerHTML = '';
+      let total = 0;
+      let totalQty = 0;
+
+      cart.forEach(item => {
+        total += item.price * item.quantity;
+        totalQty += item.quantity;
+
+        const cartItem = document.createElement('div');
+        cartItem.className = "flex items-center justify-between p-3 bg-brand-card border border-white/5 rounded-xl gap-2";
+        cartItem.innerHTML = `
+          <div class="flex-1">
+            <span class="block text-xs font-bold text-white">${item.name}</span>
+            <span class="block text-[11px] text-brand-yellow font-bold">R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')}</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="changeQuantity('${item.id}', -1)" class="w-7 h-7 bg-brand-black hover:bg-white/10 rounded-full flex items-center justify-center font-bold text-white transition-colors">-</button>
+            <span class="text-xs font-bold text-white">${item.quantity}</span>
+            <button onclick="changeQuantity('${item.id}', 1)" class="w-7 h-7 bg-brand-black hover:bg-white/10 rounded-full flex items-center justify-center font-bold text-white transition-colors">+</button>
+          </div>
+        `;
+        list.appendChild(cartItem);
+      });
+
+      if (cart.length === 0) {
+        list.innerHTML = `
+          <div class="text-center py-12 space-y-2">
+            <svg class="w-12 h-12 text-brand-gray mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+            <span class="text-xs text-brand-gray font-bold block">Seu carrinho está vazio</span>
+          </div>
+        `;
+      }
+
+      countBadge.innerText = totalQty;
+      sidebarItemsCount.innerText = totalQty;
+      totalValueContainer.innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+    }
+
+    function changeQuantity(id, amount) {
+      const item = cart.find(i => i.id === id);
+      if (item) {
+        item.quantity += amount;
+        if (item.quantity <= 0) cart = cart.filter(i => i.id !== id);
+      }
+      updateCartDisplay();
+    }
+
+    function toggleCart() {
+      document.getElementById('cart-sidebar').classList.toggle('hidden');
+    }
+
+    // =================================================================
+    // 5. CÁLCULO DE ENTREGA POR MAPA E FINALIZAÇÃO DE COMPRA
+    // =================================================================
+    const baseCoords = { lat: -22.753840, lng: -43.440635 }; 
+
+    function calcularDistancia(lat1, lon1, lat2, lon2) {
+      const R = 6371; 
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLon = (lon2 - lon1) * Math.PI / 180;
+      const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLon/2) * Math.sin(dLon/2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      return R * c;
+    }
+
+    async function buscarCEP(cep) {
+      const cepLimpo = cep.replace(/\D/g, '');
+      if (cepLimpo.length !== 8) {
+        showToast('CEP inválido! Digite 8 dígitos.');
+        return;
+      }
+
+      const ruaInput = document.getElementById('client-rua');
+      const bairroInput = document.getElementById('client-bairro');
+      const boxTaxa = document.getElementById('box-taxa-entrega');
+      const valorTaxaDisplay = document.getElementById('valor-taxa-display');
+      
+      const boxTotalFinal = document.getElementById('box-total-final');
+      const valorTotalDisplay = document.getElementById('valor-total-display');
+
+      ruaInput.value = 'Buscando...';
+      bairroInput.value = 'Buscando...';
+      boxTaxa.classList.add('hidden');
+      if (boxTotalFinal) boxTotalFinal.classList.add('hidden');
+      
+      taxaEntregaCalculada = 0;
+      distanciaCalculada = 0;
+      ruaFixaAtual = false;
+
+      try {
+        const viaCepRes = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`);
+        const data = await viaCepRes.json();
+
+        if (data.erro) {
+          ruaInput.value = '';
+          bairroInput.value = '';
+          showToast('CEP não encontrado.');
+          return;
+        }
+
+        ruaInput.value = data.logradouro || '';
+        bairroInput.value = data.bairro || '';
+
+        // Calcula o subtotal dos lanches que já estão no carrinho
+        let subtotalCarrinho = 0;
+        cart.forEach(item => subtotalCarrinho += item.price * item.quantity);
+
+        // Verificação de Ruas com Taxa Fixa de R$ 3,00
+        const logradouroNormalizado = (data.logradouro || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        const ruasFixas = [
+          "alagoas", "eugenio kan", "espirito santo", "artur bernardes filhos", 
+          "alberto torrezao", "piaui", "maranhao", "santa joana", 
+          "gilda", "vera", "marli barcelos", "elizabeth"
+        ];
+        
+        ruaFixaAtual = ruasFixas.some(rua => logradouroNormalizado.includes(rua));
+
+        const query = encodeURIComponent(`${data.logradouro}, ${data.bairro}, ${data.localidade}, RJ, Brasil`);
+        const nomRes = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}&limit=1`);
+        const nomData = await nomRes.json();
+
+        if (nomData && nomData.length > 0) {
+          const lat = parseFloat(nomData[0].lat);
+          const lon = parseFloat(nomData[0].lon);
+
+          // Puxa a distância baseada na R. Alagoas, 160
+          distanciaCalculada = calcularDistancia(baseCoords.lat, baseCoords.lng, lat, lon);
+
+          if (cepLimpo === '26013590') {
+            distanciaCalculada = 0;
+          }
+
+          if (ruaFixaAtual) {
+            taxaEntregaCalculada = 3.00;
+          } else if (distanciaCalculada <= 1.0) {
+            taxaEntregaCalculada = 4.00;
+          } else if (distanciaCalculada <= 2.0) {
+            taxaEntregaCalculada = 5.00;
+          } else if (distanciaCalculada <= 3.0) {
+            taxaEntregaCalculada = 6.00;
+          } else if (distanciaCalculada <= 4.0) {
+            taxaEntregaCalculada = 7.00;
+          } else if (distanciaCalculada <= 5.0) {
+            taxaEntregaCalculada = 8.00;
+          } else if (distanciaCalculada <= 6.0) {
+            taxaEntregaCalculada = 9.00;
+          }
+
+          boxTaxa.classList.remove('hidden');
+          
+          if (ruaFixaAtual || distanciaCalculada <= 6.0) {
+            valorTaxaDisplay.innerText = `R$ ${taxaEntregaCalculada.toFixed(2).replace('.', ',')} (${ruaFixaAtual ? 'Taxa Fixa Local' : distanciaCalculada.toFixed(1) + ' km'})`;
+            
+            if (boxTotalFinal) {
+              const valorFinal = subtotalCarrinho + taxaEntregaCalculada;
+              boxTotalFinal.classList.remove('hidden');
+              valorTotalDisplay.innerText = `R$ ${valorFinal.toFixed(2).replace('.', ',')}`;
+            }
+            
+            showToast(ruaFixaAtual ? `Taxa fixa especial aplicada para a sua rua!` : `Distância calculada: ${distanciaCalculada.toFixed(1)} km`);
+          } else {
+            valorTaxaDisplay.innerText = `Fora da Área (Max 6.0km)`;
+            showToast(`Desculpe, o limite máximo de entrega é 6 km.`);
+          }
+        } else {
+          taxaEntregaCalculada = ruaFixaAtual ? 3.00 : 6.00; // default médio
+          distanciaCalculada = ruaFixaAtual ? 0 : 3.0;
+          
+          boxTaxa.classList.remove('hidden');
+          valorTaxaDisplay.innerText = `R$ ${taxaEntregaCalculada.toFixed(2).replace('.', ',')} (${ruaFixaAtual ? 'Taxa Fixa Local' : 'Aproximado'})`;
+          
+          if (boxTotalFinal) {
+            const valorFinal = subtotalCarrinho + taxaEntregaCalculada;
+            boxTotalFinal.classList.remove('hidden');
+            valorTotalDisplay.innerText = `R$ ${valorFinal.toFixed(2).replace('.', ',')}`;
+          }
+
+          showToast(ruaFixaAtual ? `Taxa fixa especial aplicada para a sua rua!` : `Mapa não achou a rua exata. Usando taxa base.`);
+        }
+
+        document.getElementById('client-numero').focus();
+
+      } catch (error) {
+        showToast("Erro ao processar o CEP.");
+        ruaInput.value = '';
+        bairroInput.value = '';
+      }
+    }
+
+    function openCheckoutModal() {
+      if (cart.length === 0) {
+        showToast('Seu carrinho está vazio!');
+        return;
+      }
+      toggleCart();
+      document.getElementById('checkout-modal').classList.remove('hidden');
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById('checkout-modal').classList.add('hidden');
+    }
+
+    function toggleChangeInput() {
+      const paymentSelect = document.getElementById('client-payment').value;
+      const changeContainer = document.getElementById('change-container');
+      if (paymentSelect === 'Dinheiro') changeContainer.classList.remove('hidden');
+      else changeContainer.classList.add('hidden');
+    }
+
+    function handleSendOrder(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('client-name').value;
+      const phone = document.getElementById('client-phone').value;
+      const cep = document.getElementById('client-cep').value;
+      const numero = document.getElementById('client-numero').value;
+      const rua = document.getElementById('client-rua').value;
+      const bairro = document.getElementById('client-bairro').value;
+      const complemento = document.getElementById('client-complemento').value;
+      const notes = document.getElementById('client-notes').value || 'Nenhuma observação.';
+      const payment = document.getElementById('client-payment').value;
+      const change = document.getElementById('client-change').value;
+
+      if (!rua || !bairro || taxaEntregaCalculada === 0) {
+        showToast('Por favor, digite o CEP e clique em BUSCAR primeiro.');
+        return;
+      }
+      if (!ruaFixaAtual && distanciaCalculada > 6.0) {
+        showToast('Erro: Seu endereço ultrapassa o raio máximo de 6 km.');
+        return;
+      }
+
+      const enderecoCompleto = `${rua}, ${numero} - ${bairro}${complemento ? ` (${complemento})` : ''} - CEP: ${cep}`;
+
+      let orderText = `🍔 *NOVO PEDIDO - FOOD TRUCK CARIOQUINHA*\n\n`;
+      orderText += `👤 *Cliente:* ${name}\n`;
+      orderText += `📞 *Contato:* ${phone}\n`;
+      orderText += `📍 *Endereço:* ${enderecoCompleto}\n`;
+      orderText += `💳 *Pagamento:* ${payment}`;
+      
+      if (payment === 'Dinheiro' && change) orderText += ` (Troco para: R$ ${change})`;
+      
+      orderText += `\n\n🛒 *ITENS DO PEDIDO:*\n`;
+
+      let totalProdutos = 0;
+      cart.forEach((item, index) => {
+        const subtotal = item.price * item.quantity;
+        totalProdutos += subtotal;
+        orderText += `${index + 1}. ${item.quantity}x _${item.name}_ = R$ ${subtotal.toFixed(2).replace('.', ',')}\n`;
+      });
+
+      const valorFinal = totalProdutos + taxaEntregaCalculada;
+
+      orderText += `\n📦 *Subtotal dos Lanches:* R$ ${totalProdutos.toFixed(2).replace('.', ',')}\n`;
+      orderText += `🛵 *Taxa de Entrega (${ruaFixaAtual ? 'Taxa Fixa' : distanciaCalculada.toFixed(1) + ' km'}):* R$ ${taxaEntregaCalculada.toFixed(2).replace('.', ',')}\n`;
+      orderText += `💰 *TOTAL A PAGAR:* R$ ${valorFinal.toFixed(2).replace('.', ',')}\n`;
+      orderText += `📝 *Observações:* ${notes}\n\n`;
+      orderText += `*Agradecemos a preferência!*`;
+
+      const encodedText = encodeURIComponent(orderText);
+      const whatsappURL = `https://wa.me/5521983116477?text=${encodedText}`;
+      
+      cart = [];
+      updateCartDisplay();
+      closeCheckoutModal();
+      document.getElementById('checkout-form').reset();
+      
+      window.open(whatsappURL, '_blank');
+    }
+
+    // =================================================================
+    // 6. AVALIAÇÕES E PAINEL ADMIN
+    // =================================================================
+    function openReviewModal() { document.getElementById('review-modal').classList.remove('hidden'); }
+    function closeReviewModal() { document.getElementById('review-modal').classList.add('hidden'); }
+
+    function handleReview(event) {
+      event.preventDefault();
+      const name = document.getElementById('rev-name').value;
+      const stars = parseInt(document.getElementById('rev-stars').value);
+      const comment = document.getElementById('rev-comment').value;
+
+      reviews.push({ name, stars, comment });
+      localStorage.setItem('carioquinha_reviews', JSON.stringify(reviews));
+
+      event.target.reset();
+      closeReviewModal();
+      showToast('Avaliação enviada com sucesso!');
+    }
+
+    // Credenciais administrativas atualizadas conforme o sistema de segurança restrito
+    function openAdminModal() {
+      document.getElementById('admin-modal').classList.remove('hidden');
+      document.getElementById('admin-login-box').classList.remove('hidden');
+      document.getElementById('admin-dashboard-box').classList.add('hidden');
+    }
+
+    function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
+
+    function handleAdminLogin() {
+      const pass = document.getElementById('admin-password').value;
+      if (pass === 'ftc01FTc01.') {
+        document.getElementById('admin-login-box').classList.add('hidden');
+        document.getElementById('admin-dashboard-box').classList.remove('hidden');
+        renderAdminProducts();
+        loadAdminConfig();
+        renderAdminReviews();
+      } else {
+        showToast('Senha incorreta!');
+      }
+    }
+
+    function switchAdminTab(tab) {
+      document.querySelectorAll('.admin-tab-content').forEach(c => c.classList.add('hidden'));
+      document.querySelectorAll('.admin-tab-btn').forEach(b => b.className = "admin-tab-btn px-4 py-2 bg-brand-card hover:bg-white/5 rounded-lg text-sm text-white");
+      document.getElementById(`admin-tab-${tab}`).classList.remove('hidden');
+      event.target.className = "admin-tab-btn px-4 py-2 bg-brand-yellow text-black font-bold rounded-lg text-sm";
+    }
+
+    function renderAdminProducts() {
+      const list = document.getElementById('admin-products-list');
+      list.innerHTML = '';
+      products.forEach((p, idx) => {
+        const item = document.createElement('div');
+        item.className = "bg-brand-black p-3 rounded-xl flex items-center justify-between gap-4 border border-white/5 text-xs";
+        let priceSection = p.hasVariants ? `<span class="text-brand-yellow font-bold">Múltiplas Opções</span>` : `<input type="number" step="0.01" value="${p.price}" onchange="updateProductPrice(${idx}, this.value)" class="bg-brand-card w-16 text-center border border-white/10 rounded py-1 px-1 text-brand-yellow font-bold">`;
+        item.innerHTML = `
+          <div class="flex-1">
+            <span class="font-bold text-white block">${p.name}</span>
+            <span class="text-[10px] text-brand-gray block">${categoryNames[p.category] || p.category}</span>
+          </div>
+          <div class="flex items-center gap-3">
+            ${priceSection}
+            <button onclick="deleteProduct(${idx})" class="bg-brand-red text-white p-1 px-2 rounded hover:bg-red-700">Remover</button>
+          </div>
+        `;
+        list.appendChild(item);
+      });
+    }
+
+    function updateProductPrice(index, value) {
+      products[index].price = parseFloat(value);
+      localStorage.setItem('carioquinha_products', JSON.stringify(products));
+      renderProducts();
+      showToast('Preço updated!');
+    }
+
+    function deleteProduct(index) {
+      products.splice(index, 1);
+      localStorage.setItem('carioquinha_products', JSON.stringify(products));
+      renderAdminProducts();
+      renderProducts();
+      showToast('Produto removido!');
+    }
+
+    function openAddNewProductForm() { document.getElementById('admin-add-product-form').classList.toggle('hidden'); }
+    function closeAddNewProductForm() { document.getElementById('admin-add-product-form').classList.add('hidden'); }
+
+    function saveNewProduct() {
+      const name = document.getElementById('new-prod-name').value;
+      const category = document.getElementById('new-prod-cat').value;
+      const price = parseFloat(document.getElementById('new-prod-price').value);
+      const desc = document.getElementById('new-prod-desc').value;
+      const img = document.getElementById('new-prod-img').value || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80';
+
+      if (!name || !category || isNaN(price)) { showToast('Preencha os dados corretamente.'); return; }
+
+      products.push({ id: 'custom-' + Date.now(), name, category, price, description: desc, image: img });
+      localStorage.setItem('carioquinha_products', JSON.stringify(products));
+      renderAdminProducts();
+      renderProducts();
+      closeAddNewProductForm();
+      showToast('Novo item adicionado!');
+    }
+
+    function loadAdminConfig() {
+      document.getElementById('config-time-week').value = storeConfig.weekTime;
+      document.getElementById('config-time-weekend').value = storeConfig.weekendTime;
+    }
+
+    function saveAdminConfig() {
+      storeConfig.weekTime = document.getElementById('config-time-week').value;
+      storeConfig.weekendTime = document.getElementById('config-time-weekend').value;
+      localStorage.setItem('carioquinha_config', JSON.stringify(storeConfig));
+      checkStoreStatus();
+      showToast('Horários salvos!');
+    }
+
+    function renderAdminReviews() {
+      const list = document.getElementById('admin-reviews-list');
+      list.innerHTML = '';
+      if (reviews.length === 0) {
+        list.innerHTML = '<p class="text-xs text-brand-gray text-center">Nenhum comentário cadastrado.</p>';
+        return;
+      }
+      reviews.forEach(r => {
+        const item = document.createElement('div');
+        item.className = "bg-brand-black p-3 rounded-lg text-xs space-y-1";
+        item.innerHTML = `
+          <div class="flex justify-between font-bold text-brand-yellow">
+            <span>${r.name}</span>
+            <span>Nota: ${r.stars}</span>
+          </div>
+          <p class="text-white/80">${r.comment}</p>
+        `;
+        list.appendChild(item);
+      });
+    }
+
+    function clearAllReviews() {
+      reviews = [];
+      localStorage.setItem('carioquinha_reviews', JSON.stringify([]));
+      renderAdminReviews();
+      showToast('Avaliações limpas!');
+    }
+  </script>
+</body>
+</html>
