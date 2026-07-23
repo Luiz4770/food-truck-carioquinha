@@ -659,98 +659,106 @@
                 class="w-full bg-brand-card border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-brand-yellow focus:outline-none transition-all">
             </div>
 
-            <div class="space-y-4">
+            <!-- NOVA SEÇÃO DE BUSCA: CEP E RUA UNIFICADOS -->
+            <div class="p-4 bg-brand-black/50 border border-brand-yellow/20 rounded-xl space-y-4">
               <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-brand-gray mb-1">CEP *</label>
+                <label class="block text-xs font-bold uppercase tracking-wider text-brand-gray mb-1">CEP ou Nome da Rua *</label>
                 <div class="flex gap-2">
-                  <input type="text" id="client-cep" required maxlength="9" placeholder="26000-000"
-                    onblur="buscarCEP(this.value)"
-                    class="w-full bg-brand-card border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-brand-yellow focus:outline-none transition-all">
-                  <button type="button" onclick="buscarCEP(document.getElementById('client-cep').value)"
-                    class="bg-brand-yellow text-black font-bold px-4 rounded-xl text-xs">BUSCAR</button>
-                </div>
-              </div>
-
-              <div class="grid grid-cols-4 gap-2">
-                <div class="col-span-3">
-                  <label class="block text-xs font-bold uppercase tracking-wider text-brand-gray mb-1">Rua *</label>
-                  <input type="text" id="client-rua" required readonly
-                    class="w-full bg-brand-black border border-white/10 rounded-xl px-4 py-3 text-white/50 focus:outline-none">
-                </div>
-                <div class="col-span-1">
-                  <label class="block text-xs font-bold uppercase tracking-wider text-brand-gray mb-1">Nº *</label>
-                  <input type="text" id="client-numero" required
+                  <input type="text" id="client-search" required placeholder="Ex: 26000-000 ou Maranhão"
                     class="w-full bg-brand-card border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-brand-yellow focus:outline-none">
+                  <button type="button" onclick="pesquisarEndereco()"
+                    class="bg-brand-yellow text-black font-bold px-4 rounded-xl text-xs whitespace-nowrap shadow-lg shadow-brand-yellow/20">BUSCAR</button>
                 </div>
+                <span class="text-[10px] text-brand-gray mt-1 block">Busca bairros num raio de entrega de até 3km.</span>
               </div>
 
-              <div class="grid grid-cols-2 gap-2">
+              <!-- PAINEL DE RESULTADOS (INICIA OCULTO) -->
+              <div id="endereco-resultados" class="hidden space-y-4 pt-2 border-t border-white/10">
                 <div>
-                  <label class="block text-xs font-bold uppercase tracking-wider text-brand-gray mb-1">Bairro *</label>
-                  <input type="text" id="client-bairro" required readonly
-                    class="w-full bg-brand-black border border-white/10 rounded-xl px-4 py-3 text-white/50 focus:outline-none">
+                  <label class="block text-xs font-bold uppercase tracking-wider text-brand-gray mb-1">Selecione o Endereço Encontrado *</label>
+                  <select id="client-endereco-select" onchange="selecionarEndereco()" required
+                    class="w-full bg-brand-black border border-brand-yellow/50 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-brand-yellow focus:outline-none text-sm">
+                    <!-- Opções preenchidas dinamicamente -->
+                  </select>
                 </div>
-                <div>
-                  <label
-                    class="block text-xs font-bold uppercase tracking-wider text-brand-gray mb-1">Complemento</label>
-                  <input type="text" id="client-complemento" placeholder="Apto, Bloco..."
-                    class="w-full bg-brand-card border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-brand-yellow focus:outline-none">
+
+                <div class="grid grid-cols-2 gap-3">
+                  <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-brand-gray mb-1">Nº *</label>
+                    <input type="text" id="client-numero" required placeholder="123"
+                      class="w-full bg-brand-card border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-brand-yellow focus:outline-none">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-brand-gray mb-1">Comp.</label>
+                    <input type="text" id="client-complemento" placeholder="Apto 2"
+                      class="w-full bg-brand-card border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-brand-yellow focus:outline-none">
+                  </div>
                 </div>
-              </div>
 
-              <div id="box-taxa-entrega"
-                class="hidden bg-brand-yellow/10 border border-brand-yellow/30 p-3 rounded-xl flex justify-between items-center">
-                <span class="text-xs font-bold text-brand-yellow uppercase">Taxa de Entrega:</span>
-                <span id="valor-taxa-display" class="text-lg font-black text-white">R$ 0,00</span>
-              </div>
-
-              <div id="box-total-final"
-                class="hidden bg-brand-red/10 border border-brand-red/30 p-3 rounded-xl flex justify-between items-center mt-2">
-                <span class="text-xs font-bold text-brand-red uppercase">Total (Lanches + Taxa):</span>
-                <span id="valor-total-display" class="text-xl font-black text-white">R$ 0,00</span>
-              </div>
-
-              <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-brand-gray mb-1">Observações do
-                  Pedido</label>
-                <textarea id="client-notes" placeholder="Ex: Sem cebola, ponto da carne, trocar acompanhamento..."
-                  class="w-full bg-brand-card border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-brand-yellow focus:outline-none transition-all h-20 resize-none"></textarea>
-              </div>
-
-              <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-brand-gray mb-1">Forma de Pagamento
-                  *</label>
-                <select id="client-payment" onchange="toggleChangeInput()" required
-                  class="w-full bg-brand-card border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-brand-yellow focus:outline-none transition-all">
-                  <option value="Pix">Pix</option>
-                  <option value="Cartao-Debito">Cartão de Débito</option>
-                  <option value="Cartao-Credito">Cartão de Crédito</option>
-                  <option value="Alelo">Vale-Refeição Alelo</option>
-                  <option value="Dinheiro">Dinheiro</option>
-                </select>
-              </div>
-
-              <div id="change-container" class="hidden">
-                <label class="block text-xs font-bold uppercase tracking-wider text-brand-gray mb-1">Precisa de
-                  troco?</label>
-                <input type="text" id="client-change" placeholder="Troco para quanto?"
-                  class="w-full bg-brand-card border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-brand-yellow focus:outline-none transition-all">
-              </div>
-
-              <div class="pt-4 border-t border-white/10 flex gap-4">
-                <button type="button" onclick="closeCheckoutModal()"
-                  class="w-1/2 bg-transparent hover:bg-white/5 border border-white/10 text-white font-bold py-3.5 rounded-xl transition-all">
-                  Cancelar
-                </button>
-                <button type="submit"
-                  class="w-1/2 bg-green-600 hover:bg-green-700 text-white font-black py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 glow-red">
-                  <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                      d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
-                  </svg>
-                  ENVIAR PEDIDO
+                <button type="button" onclick="calcularTaxaPorEndereco()"
+                  class="w-full bg-brand-yellow text-black font-bold py-3 rounded-xl transition-all text-xs uppercase tracking-wider glow-yellow">
+                  Confirmar Endereço e Calcular Taxa
                 </button>
               </div>
+            </div>
+
+            <!-- Campos ocultos que guardarão a rua e o bairro final selecionados -->
+            <input type="hidden" id="client-rua" value="">
+            <input type="hidden" id="client-bairro" value="">
+
+            <div id="box-taxa-entrega"
+              class="hidden bg-brand-yellow/10 border border-brand-yellow/30 p-3 rounded-xl flex justify-between items-center">
+              <span class="text-xs font-bold text-brand-yellow uppercase">Taxa de Entrega:</span>
+              <span id="valor-taxa-display" class="text-lg font-black text-white">R$ 0,00</span>
+            </div>
+
+            <div id="box-total-final"
+              class="hidden bg-brand-red/10 border border-brand-red/30 p-3 rounded-xl flex justify-between items-center mt-2">
+              <span class="text-xs font-bold text-brand-red uppercase">Total (Lanches + Taxa):</span>
+              <span id="valor-total-display" class="text-xl font-black text-white">R$ 0,00</span>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-brand-gray mb-1">Observações do
+                Pedido</label>
+              <textarea id="client-notes" placeholder="Ex: Sem cebola, ponto da carne, trocar acompanhamento..."
+                class="w-full bg-brand-card border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-brand-yellow focus:outline-none transition-all h-20 resize-none"></textarea>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-brand-gray mb-1">Forma de Pagamento
+                *</label>
+              <select id="client-payment" onchange="toggleChangeInput()" required
+                class="w-full bg-brand-card border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-brand-yellow focus:outline-none transition-all">
+                <option value="Pix">Pix</option>
+                <option value="Cartao-Debito">Cartão de Débito</option>
+                <option value="Cartao-Credito">Cartão de Crédito</option>
+                <option value="Alelo">Vale-Refeição Alelo</option>
+                <option value="Dinheiro">Dinheiro</option>
+              </select>
+            </div>
+
+            <div id="change-container" class="hidden">
+              <label class="block text-xs font-bold uppercase tracking-wider text-brand-gray mb-1">Precisa de
+                troco?</label>
+              <input type="text" id="client-change" placeholder="Troco para quanto?"
+                class="w-full bg-brand-card border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-brand-yellow focus:outline-none transition-all">
+            </div>
+
+            <div class="pt-4 border-t border-white/10 flex gap-4">
+              <button type="button" onclick="closeCheckoutModal()"
+                class="w-1/2 bg-transparent hover:bg-white/5 border border-white/10 text-white font-bold py-3.5 rounded-xl transition-all">
+                Cancelar
+              </button>
+              <button type="submit"
+                class="w-1/2 bg-green-600 hover:bg-green-700 text-white font-black py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 glow-red">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                </svg>
+                ENVIAR PEDIDO
+              </button>
+            </div>
           </form>
         </div>
       </div>
@@ -1237,7 +1245,7 @@
       closedDay: 2 // Terça-feira
     };
 
-    const dbVersion = '9.6'; // Atualizado para forçar recarregamento do novo sistema
+    const dbVersion = '9.8'; // Atualizado para forçar recarregamento do novo sistema
 
     window.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('img[src="batata.jpg"]').forEach(img => img.src = 'imagens/batata.jpg');
@@ -1566,11 +1574,10 @@
     // 5. CÁLCULO DE ENTREGA POR MAPA E FINALIZAÇÃO DE COMPRA
     // =================================================================
     const CEP_DA_LOJA = '26013590';
-    let coordenadasDaLoja = null; // Vamos guardar aqui para não precisar consultar a API toda hora
+    let coordenadasDaLoja = null;
 
-    // Função que descobre as coordenadas do seu CEP base dinamicamente
     async function obterCoordenadasBase() {
-      if (coordenadasDaLoja) return coordenadasDaLoja; // Se já buscou antes, usa o salvo
+      if (coordenadasDaLoja) return coordenadasDaLoja;
 
       try {
         const viaCepRes = await fetch(`https://viacep.com.br/ws/${CEP_DA_LOJA}/json/`);
@@ -1588,7 +1595,6 @@
         console.error("Erro ao buscar coordenadas da loja pelo CEP.", error);
       }
 
-      // Fallback de segurança caso a API de mapas saia do ar momentaneamente
       return { lat: -22.753840, lng: -43.440635 };
     }
 
@@ -1603,127 +1609,200 @@
       return R * c;
     }
 
-    async function buscarCEP(cep) {
-      const cepLimpo = cep.replace(/\D/g, '');
-      if (cepLimpo.length !== 8) {
-        showToast('CEP inválido! Digite 8 dígitos.');
+    async function pesquisarEndereco() {
+      const searchInput = document.getElementById('client-search').value.trim();
+      const select = document.getElementById('client-endereco-select');
+      const container = document.getElementById('endereco-resultados');
+      const boxTaxa = document.getElementById('box-taxa-entrega');
+      const boxTotal = document.getElementById('box-total-final');
+
+      if (boxTaxa) boxTaxa.classList.add('hidden');
+      if (boxTotal) boxTotal.classList.add('hidden');
+
+      if (!searchInput) {
+        showToast('Digite um CEP ou nome de rua para buscar.');
         return;
       }
 
-      const ruaInput = document.getElementById('client-rua');
-      const bairroInput = document.getElementById('client-bairro');
+      select.innerHTML = '<option value="">Buscando, aguarde...</option>';
+      container.classList.remove('hidden');
+
+      const cepLimpo = searchInput.replace(/\D/g, '');
+
+      try {
+        if (cepLimpo.length === 8) {
+          // Busca exata via CEP
+          const res = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`);
+          const data = await res.json();
+
+          if (data.erro) {
+            select.innerHTML = '<option value="">CEP não encontrado.</option>';
+            showToast('CEP não encontrado em nossa base.');
+            return;
+          }
+
+          select.innerHTML = `<option value="${data.logradouro}|${data.bairro}">${data.logradouro} - Bairro: ${data.bairro}</option>`;
+          selecionarEndereco(); // Seleciona automaticamente se for CEP exato
+          showToast('Endereço encontrado com sucesso pelo CEP!');
+        } else {
+          // Busca inteligente via Rua em Nova Iguaçu
+          const ruaLimpa = searchInput.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+          
+          if (ruaLimpa.length < 3) {
+            select.innerHTML = '<option value="">Digite pelo menos 3 letras.</option>';
+            showToast('Digite pelo menos 3 letras do nome da rua.');
+            return;
+          }
+
+          const res = await fetch(`https://viacep.com.br/ws/RJ/Nova Iguacu/${ruaLimpa}/json/`);
+          const data = await res.json();
+
+          if (!data || data.length === 0 || data.erro) {
+            select.innerHTML = '<option value="">Nenhum resultado encontrado.</option>';
+            showToast('Nenhuma rua encontrada em Nova Iguaçu com esse nome.');
+            return;
+          }
+
+          select.innerHTML = '<option value="">Selecione seu bairro na lista abaixo...</option>';
+          const unicos = [];
+          
+          // Preenche apenas opções únicas para evitar spam na lista
+          data.forEach(end => {
+            const key = `${end.logradouro}|${end.bairro}`;
+            if (!unicos.includes(key) && end.bairro) {
+              unicos.push(key);
+              const opt = document.createElement('option');
+              opt.value = key;
+              opt.innerText = `${end.logradouro} - Bairro: ${end.bairro}`;
+              select.appendChild(opt);
+            }
+          });
+
+          if (unicos.length === 0) {
+            select.innerHTML = '<option value="">Bairros não especificados na base.</option>';
+            showToast('Rua encontrada, mas a localização falhou em informar os bairros.');
+          } else {
+            showToast('Bairros encontrados! Selecione o seu bairro na lista.');
+          }
+        }
+      } catch (err) {
+        select.innerHTML = '<option value="">Erro ao buscar.</option>';
+        showToast('Falha na comunicação com o sistema de endereços.');
+      }
+    }
+
+    function selecionarEndereco() {
+      const select = document.getElementById('client-endereco-select');
+      const val = select.value;
+      if (val) {
+        const parts = val.split('|');
+        document.getElementById('client-rua').value = parts[0];
+        document.getElementById('client-bairro').value = parts[1];
+        // Foca automaticamente no campo de número para o cliente
+        document.getElementById('client-numero').focus();
+      } else {
+        document.getElementById('client-rua').value = '';
+        document.getElementById('client-bairro').value = '';
+      }
+    }
+
+    async function calcularTaxaPorEndereco() {
+      const rua = document.getElementById('client-rua').value;
+      const bairro = document.getElementById('client-bairro').value;
+      const numero = document.getElementById('client-numero').value.trim();
       const boxTaxa = document.getElementById('box-taxa-entrega');
       const valorTaxaDisplay = document.getElementById('valor-taxa-display');
-
       const boxTotalFinal = document.getElementById('box-total-final');
       const valorTotalDisplay = document.getElementById('valor-total-display');
 
-      ruaInput.value = 'Buscando...';
-      bairroInput.value = 'Buscando...';
-      boxTaxa.classList.add('hidden');
+      if (!rua || !bairro) {
+        showToast('Por favor, utilize o botão BUSCAR e selecione o seu bairro primeiro.');
+        return;
+      }
+
+      if (!numero) {
+        showToast('Por favor, informe o número da sua residência antes de calcular a taxa.');
+        document.getElementById('client-numero').focus();
+        return;
+      }
+
+      boxTaxa.classList.remove('hidden');
       if (boxTotalFinal) boxTotalFinal.classList.add('hidden');
+      valorTaxaDisplay.innerText = 'Calculando distância exata...';
 
       taxaEntregaCalculada = 0;
       distanciaCalculada = 0;
       ruaFixaAtual = false;
 
+      let subtotalCarrinho = 0;
+      cart.forEach(item => subtotalCarrinho += item.price * item.quantity);
+
+      // Verificação de Ruas com Taxa Fixa (Carioquinha)
+      const logradouroNormalizado = rua.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      const ruasFixas = [
+        "alagoas", "eugenio kan", "espirito santo", "artur bernardes filhos",
+        "alberto torrezao", "piaui", "maranhao", "santa joana",
+        "gilda", "vera", "marli barcelos", "elizabeth"
+      ];
+      ruaFixaAtual = ruasFixas.some(r => logradouroNormalizado.includes(r));
+
       try {
-        const viaCepRes = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`);
-        const data = await viaCepRes.json();
+        // Tenta buscar as coordenadas exatas juntando Rua, NÚMERO DA CASA, Bairro e Cidade
+        const queryComNumero = encodeURIComponent(`${rua}, ${numero}, ${bairro}, Nova Iguaçu, RJ, Brasil`);
+        let nomRes = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${queryComNumero}&limit=1`);
+        let nomData = await nomRes.json();
 
-        if (data.erro) {
-          ruaInput.value = '';
-          bairroInput.value = '';
-          showToast('CEP não encontrado.');
-          return;
+        // Fallback de segurança: Muitas vezes o mapa não tem o número da casa registrado no Brasil. 
+        // Se falhar com o número, refaz a busca apenas pela rua para não quebrar o site do cliente.
+        if (!nomData || nomData.length === 0) {
+          const querySemNumero = encodeURIComponent(`${rua}, ${bairro}, Nova Iguaçu, RJ, Brasil`);
+          nomRes = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${querySemNumero}&limit=1`);
+          nomData = await nomRes.json();
         }
-
-        ruaInput.value = data.logradouro || '';
-        bairroInput.value = data.bairro || '';
-
-        // Calcula o subtotal dos lanches que já estão no carrinho
-        let subtotalCarrinho = 0;
-        cart.forEach(item => subtotalCarrinho += item.price * item.quantity);
-
-        // Verificação de Ruas com Taxa Fixa de R$ 3,00
-        const logradouroNormalizado = (data.logradouro || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        const ruasFixas = [
-          "alagoas", "eugenio kan", "espirito santo", "artur bernardes filhos",
-          "alberto torrezao", "piaui", "maranhao", "santa joana",
-          "gilda", "vera", "marli barcelos", "elizabeth"
-        ];
-
-        ruaFixaAtual = ruasFixas.some(rua => logradouroNormalizado.includes(rua));
-
-        const query = encodeURIComponent(`${data.logradouro}, ${data.bairro}, ${data.localidade}, RJ, Brasil`);
-        const nomRes = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}&limit=1`);
-        const nomData = await nomRes.json();
 
         if (nomData && nomData.length > 0) {
           const lat = parseFloat(nomData[0].lat);
           const lon = parseFloat(nomData[0].lon);
 
-          // Puxa as coordenadas da loja através da nova função usando o CEP
           const base = await obterCoordenadasBase();
+          distanciaCalculada = calcularDistancia(base.lat, base.lng, lat, lon);
 
-          // Se for o exato CEP da loja, a distância é 0. Se não, calcula a distância real.
-          distanciaCalculada = (cepLimpo === CEP_DA_LOJA) ? 0 : calcularDistancia(base.lat, base.lng, lat, lon);
+          if (ruaFixaAtual) { taxaEntregaCalculada = 3.00; } 
+          else if (distanciaCalculada <= 1.0) { taxaEntregaCalculada = 4.00; }
+          else if (distanciaCalculada <= 2.0) { taxaEntregaCalculada = 5.00; }
+          else if (distanciaCalculada <= 3.0) { taxaEntregaCalculada = 6.00; }
 
-          // Lógica de cálculo da taxa corrigida para abranger todos os CEPs
-          if (ruaFixaAtual) {
-            taxaEntregaCalculada = 3.00;
-          } else if (distanciaCalculada <= 1.0) {
-            taxaEntregaCalculada = 4.00;
-          } else if (distanciaCalculada <= 2.0) {
-            taxaEntregaCalculada = 5.00;
-          } else if (distanciaCalculada <= 3.0) {
-            taxaEntregaCalculada = 6.00;
-          } else if (distanciaCalculada <= 4.0) {
-            taxaEntregaCalculada = 7.00;
-          } else if (distanciaCalculada <= 5.0) {
-            taxaEntregaCalculada = 8.00;
-          } else if (distanciaCalculada <= 6.0) {
-            taxaEntregaCalculada = 9.00;
-          }
-
-          boxTaxa.classList.remove('hidden');
-
-          if (ruaFixaAtual || distanciaCalculada <= 6.0) {
+          // Validação explícita de RAIO MÁXIMO DE 3KM
+          if (ruaFixaAtual || distanciaCalculada <= 3.0) {
             valorTaxaDisplay.innerText = `R$ ${taxaEntregaCalculada.toFixed(2).replace('.', ',')} (${ruaFixaAtual ? 'Taxa Fixa Local' : distanciaCalculada.toFixed(1) + ' km'})`;
-
+            
             if (boxTotalFinal) {
               const valorFinal = subtotalCarrinho + taxaEntregaCalculada;
               boxTotalFinal.classList.remove('hidden');
               valorTotalDisplay.innerText = `R$ ${valorFinal.toFixed(2).replace('.', ',')}`;
             }
-
-            showToast(ruaFixaAtual ? `Taxa fixa especial aplicada para a sua rua!` : `Distância calculada: ${distanciaCalculada.toFixed(1)} km`);
+            showToast(ruaFixaAtual ? `Taxa fixa especial aplicada para a sua rua!` : `Endereço processado: Distância de ${distanciaCalculada.toFixed(1)} km.`);
           } else {
-            valorTaxaDisplay.innerText = `Fora da Área (Max 6.0km)`;
-            showToast(`Desculpe, o limite máximo de entrega é 6 km.`);
+            valorTaxaDisplay.innerText = `Fora da Área (Max 3.0km)`;
+            showToast(`Este endereço fica a ${distanciaCalculada.toFixed(1)}km. Nosso limite de entregas é de até 3km.`);
+            taxaEntregaCalculada = 0; // Bloqueia o envio do pedido
           }
         } else {
-          taxaEntregaCalculada = ruaFixaAtual ? 3.00 : 6.00; // default médio
+          // Caso a rua não exista no mapa de jeito nenhum, cobra a taxa de segurança
+          taxaEntregaCalculada = ruaFixaAtual ? 3.00 : 6.00;
           distanciaCalculada = ruaFixaAtual ? 0 : 3.0;
 
-          boxTaxa.classList.remove('hidden');
-          valorTaxaDisplay.innerText = `R$ ${taxaEntregaCalculada.toFixed(2).replace('.', ',')} (${ruaFixaAtual ? 'Taxa Fixa Local' : 'Aproximado'})`;
-
+          valorTaxaDisplay.innerText = `R$ ${taxaEntregaCalculada.toFixed(2).replace('.', ',')} (${ruaFixaAtual ? 'Taxa Fixa Local' : 'Área Aproximada'})`;
+          
           if (boxTotalFinal) {
             const valorFinal = subtotalCarrinho + taxaEntregaCalculada;
             boxTotalFinal.classList.remove('hidden');
             valorTotalDisplay.innerText = `R$ ${valorFinal.toFixed(2).replace('.', ',')}`;
           }
-
-          showToast(ruaFixaAtual ? `Taxa fixa especial aplicada para a sua rua!` : `Mapa não achou a rua exata. Usando taxa base.`);
+          showToast(ruaFixaAtual ? `Taxa fixa especial aplicada para a sua rua!` : `Endereço aceito. Taxa de base aplicada.`);
         }
-
-        document.getElementById('client-numero').focus();
-
       } catch (error) {
-        showToast("Erro ao processar o CEP.");
-        ruaInput.value = '';
-        bairroInput.value = '';
+        showToast("Erro ao processar o cálculo da distância no mapa.");
       }
     }
 
@@ -1734,6 +1813,9 @@
       }
       toggleCart();
       document.getElementById('checkout-modal').classList.remove('hidden');
+      document.getElementById('endereco-resultados').classList.add('hidden');
+      document.getElementById('box-taxa-entrega').classList.add('hidden');
+      document.getElementById('box-total-final').classList.add('hidden');
     }
 
     function closeCheckoutModal() {
@@ -1752,25 +1834,31 @@
 
       const name = document.getElementById('client-name').value;
       const phone = document.getElementById('client-phone').value;
-      const cep = document.getElementById('client-cep').value;
       const numero = document.getElementById('client-numero').value;
+      
       const rua = document.getElementById('client-rua').value;
       const bairro = document.getElementById('client-bairro').value;
+      
       const complemento = document.getElementById('client-complemento').value;
       const notes = document.getElementById('client-notes').value || 'Nenhuma observação.';
       const payment = document.getElementById('client-payment').value;
       const change = document.getElementById('client-change').value;
 
       if (!rua || !bairro || taxaEntregaCalculada === 0) {
-        showToast('Por favor, digite o CEP e clique em BUSCAR primeiro.');
+        showToast('Por favor, faça a busca do endereço e clique em CONFIRMAR E CALCULAR TAXA DE ENTREGA primeiro.');
         return;
       }
-      if (!ruaFixaAtual && distanciaCalculada > 6.0) {
-        showToast('Erro: Seu endereço ultrapassa o raio máximo de 6 km.');
+      if (!numero) {
+        showToast('Por favor, informe o número da sua residência.');
+        document.getElementById('client-numero').focus();
+        return;
+      }
+      if (!ruaFixaAtual && distanciaCalculada > 3.0) {
+        showToast('Erro: Seu endereço ultrapassa nosso raio máximo de entrega de 3km.');
         return;
       }
 
-      const enderecoCompleto = `${rua}, ${numero} - ${bairro}${complemento ? ` (${complemento})` : ''} - CEP: ${cep}`;
+      const enderecoCompleto = `${rua}, ${numero} - Bairro: ${bairro}${complemento ? ` (${complemento})` : ''}`;
 
       let orderText = `🍔 *NOVO PEDIDO - FOOD TRUCK CARIOQUINHA*\n\n`;
       orderText += `👤 *Cliente:* ${name}\n`;
@@ -1828,7 +1916,6 @@
       showToast('Avaliação enviada com sucesso!');
     }
 
-    // Credenciais administrativas atualizadas conforme o sistema de segurança restrito
     function openAdminModal() {
       document.getElementById('admin-modal').classList.remove('hidden');
       document.getElementById('admin-login-box').classList.remove('hidden');
