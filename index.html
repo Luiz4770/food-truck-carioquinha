@@ -1282,9 +1282,10 @@
       let isOpen = false;
       let reason = "FECHADO NO MOMENTO - Retornamos às 18:00h";
 
-      if (currentDay === storeConfig.closedDay) {
+      // 2 = Terça-feira, 3 = Quarta-feira
+      if (currentDay === 2 || currentDay === 3) {
         isOpen = false;
-        reason = "FECHADO ÀS TERÇAS-FEIRAS";
+        reason = "FECHADO NO MOMENTO - TERÇA E QUARTA É FOLGA";
       } else {
         const startMinutes = 18 * 60;
         let endMinutes = 0;
